@@ -87,7 +87,7 @@ export default function Reviews() {
             <span className="gradient-text">Clients Say</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Don't just take our word for it - hear from our satisfied clients
+            Don&apos;t just take our word for it - hear from our satisfied clients
           </p>
         </motion.div>
 
@@ -131,7 +131,7 @@ export default function Reviews() {
 
                   {/* Review Text */}
                   <p className="text-gray-300 mb-6 text-lg leading-relaxed relative z-10">
-                    "{review.text}"
+                    &ldquo;{review.text}&rdquo;
                   </p>
 
                   {/* Author */}

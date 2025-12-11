@@ -53,7 +53,7 @@ export default function Contact() {
               <span className="gradient-text">Us</span>
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed">
-              Have a project in mind? Let's discuss how we can help bring your vision to life
+              Have a project in mind? Let&apos;s discuss how we can help bring your vision to life
             </p>
           </motion.div>
         </div>
@@ -72,7 +72,7 @@ export default function Contact() {
             >
               <h2 className="text-3xl font-bold text-white mb-8">Get in Touch</h2>
               <p className="text-gray-400 mb-8">
-                We're here to help! Reach out to us through any of the following channels or fill out the form.
+                We&apos;re here to help! Reach out to us through any of the following channels or fill out the form.
               </p>
 
               <div className="space-y-6 mb-8">

@@ -382,7 +382,7 @@ export default function ServiceDetail() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
-            <p className="text-xl text-gray-400 mb-8">Let's discuss your project and create something amazing together</p>
+            <p className="text-xl text-gray-400 mb-8">Let&apos;s discuss your project and create something amazing together</p>
             <Link href="/contact">
               <motion.button
                 whileHover={{ scale: 1.05 }}

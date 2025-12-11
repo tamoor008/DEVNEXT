@@ -8,7 +8,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronDown, Smartphone, Globe, Palette, Code, Database, Cloud, Shield } from 'lucide-react';
 
-const services = [
+type Service = {
+  id: string;
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  description: string;
+  color: string;
+  image: string;
+  details: {
+    features: string[];
+    technologies: string[];
+  };
+};
+
+const services: Service[] = [
   {
     id: 'app-development',
     title: 'App Development',
@@ -152,7 +165,7 @@ function ServicesList({
   listVariants,
   cardVariants 
 }: {
-  services: typeof services;
+  services: Service[];
   openService: string | null;
   toggleService: (id: string) => void;
   listVariants: any;
@@ -191,7 +204,7 @@ function ServiceCard({
   onToggle,
   variants 
 }: {
-  service: typeof services[0];
+  service: Service;
   index: number;
   isOpen: boolean;
   onToggle: () => void;

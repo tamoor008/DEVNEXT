@@ -86,7 +86,7 @@ export default function ContactForm() {
             <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Have a project in mind? Let's discuss how we can help bring your vision to life
+            Have a project in mind? Let&apos;s discuss how we can help bring your vision to life
           </p>
         </motion.div>
 

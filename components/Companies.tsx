@@ -21,7 +21,7 @@ export default function Companies() {
           <h3 className="text-2xl sm:text-3xl font-bold text-gray-300 mb-2">
             Trusted by Industry Leaders
           </h3>
-          <p className="text-gray-500">Companies we've had the privilege to work with</p>
+          <p className="text-gray-500">Companies we&apos;ve had the privilege to work with</p>
         </motion.div>
 
         <div className="relative">

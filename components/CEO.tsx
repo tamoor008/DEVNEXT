@@ -102,7 +102,7 @@ export default function CEO() {
               >
                 <Quote className="absolute top-4 left-4 w-8 h-8 text-accent-primary opacity-20" />
                 <p className="text-lg text-gray-300 italic pl-8 relative z-10">
-                  "{ceoData.quote}"
+                  &ldquo;{ceoData.quote}&rdquo;
                 </p>
               </motion.div>
 

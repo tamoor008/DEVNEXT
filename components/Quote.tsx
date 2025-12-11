@@ -34,7 +34,7 @@ export default function Quote() {
           </h2>
 
           <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-            Let's discuss your project and create something extraordinary together. Get a free quote today.
+            Let&apos;s discuss your project and create something extraordinary together. Get a free quote today.
           </p>
 
           <motion.div
