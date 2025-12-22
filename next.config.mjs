@@ -14,6 +14,11 @@ const nextConfig = {
       },
     ],
   },
+  // Suppress specific runtime errors in development
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
 };
 
 export default nextConfig;

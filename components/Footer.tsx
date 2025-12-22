@@ -133,7 +133,7 @@ export default function Footer() {
                 <div className="flex items-start space-x-4">
                   <Mail className="w-5 h-5 text-accent-primary mt-1 flex-shrink-0" />
                   <div className="text-gray-400">
-                    <p>hello@devnext.com</p>
+                    <p>hello@technifuse.com</p>
                   </div>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function Footer() {
               transition={{ duration: 0.5 }}
               className="text-gray-400 text-sm order-1 sm:order-1"
             >
-              Copyright © {new Date().getFullYear()} DEVNEXT.
+              Copyright © {new Date().getFullYear()} TechniFuse.
             </motion.div>
 
             {/* Center - Navigation Links */}

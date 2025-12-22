@@ -109,7 +109,7 @@ export default function ServicesPreview() {
                     </div>
 
                     {/* Image Side */}
-                    <div className="relative h-48 md:h-56 overflow-hidden">
+                    <div className="relative h-48 md:h-full overflow-hidden">
                       <div className="absolute inset-0">
                         <Image
                           src={service.image}

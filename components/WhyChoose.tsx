@@ -44,7 +44,7 @@ export default function WhyChoose() {
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">
             <span className="text-white">Why Choose</span>{' '}
-            <span className="gradient-text">DEVNEXT</span>
+            <span className="gradient-text">TechniFuse</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Results-focused product teams combining strategy, design, engineering, and growth under one roof.

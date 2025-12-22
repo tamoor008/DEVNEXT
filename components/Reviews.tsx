@@ -11,7 +11,7 @@ const reviews = [
     role: 'CEO, TechStart',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
     rating: 5,
-    text: 'DEVNEXT transformed our digital presence. Their attention to detail and innovative solutions exceeded our expectations.',
+    text: 'TechniFuse transformed our digital presence. Their attention to detail and innovative solutions exceeded our expectations.',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const reviews = [
     role: 'Founder, InnovateLab',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
     rating: 5,
-    text: 'Working with DEVNEXT was a game-changer. They delivered a stunning app that our users absolutely love.',
+    text: 'Working with TechniFuse was a game-changer. They delivered a stunning app that our users absolutely love.',
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const reviews = [
     role: 'Director, DigitalFlow',
     image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150',
     rating: 5,
-    text: 'Professional, creative, and results-driven. DEVNEXT helped us achieve our goals faster than we imagined.',
+    text: 'Professional, creative, and results-driven. TechniFuse helped us achieve our goals faster than we imagined.',
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const reviews = [
     role: 'CTO, CloudSync',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150',
     rating: 5,
-    text: 'Outstanding service and expertise. DEVNEXT built us a scalable platform that handles millions of users seamlessly.',
+    text: 'Outstanding service and expertise. TechniFuse built us a scalable platform that handles millions of users seamlessly.',
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const reviews = [
     role: 'Marketing Director, NextGen',
     image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150',
     rating: 5,
-    text: 'The team at DEVNEXT understood our vision perfectly and delivered beyond our expectations. Highly recommended!',
+    text: 'The team at TechniFuse understood our vision perfectly and delivered beyond our expectations. Highly recommended!',
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ const reviews = [
     role: 'Founder, SmartSolutions',
     image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
     rating: 5,
-    text: 'Exceptional quality and professionalism. DEVNEXT transformed our business with their innovative solutions.',
+    text: 'Exceptional quality and professionalism. TechniFuse transformed our business with their innovative solutions.',
   },
   {
     id: 7,
@@ -59,7 +59,7 @@ const reviews = [
     role: 'Product Manager, FutureTech',
     image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150',
     rating: 5,
-    text: 'Working with DEVNEXT was a pleasure. They delivered on time, within budget, and exceeded all our expectations.',
+    text: 'Working with TechniFuse was a pleasure. They delivered on time, within budget, and exceeded all our expectations.',
   },
   {
     id: 8,
@@ -67,7 +67,7 @@ const reviews = [
     role: 'CEO, CodeCraft',
     image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150',
     rating: 5,
-    text: 'DEVNEXT is the best development agency we\'ve worked with. Their technical expertise and creativity are unmatched.',
+    text: 'TechniFuse is the best development agency we\'ve worked with. Their technical expertise and creativity are unmatched.',
   },
 ];
 

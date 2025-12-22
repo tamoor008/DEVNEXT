@@ -47,7 +47,7 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
 
 export default function Stats() {
   return (
-    <section className="py-24 bg-dark-100 relative overflow-hidden">
+    <section className="pt-24 pb-0 bg-dark-100 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_70%)]" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-16">

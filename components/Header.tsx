@@ -56,7 +56,7 @@ export default function Header() {
               whileHover={{ scale: 1.1, rotate: 5 }}
               className="text-2xl font-bold gradient-text"
             >
-              DEVNEXT
+              TechniFuse
             </motion.div>
           </Link>
 

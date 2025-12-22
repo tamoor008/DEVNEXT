@@ -1,4 +1,4 @@
-# DEVNEXT - Premium Development Agency Website
+# TechniFuse - Premium Development Agency Website
 
 A modern, high-performance Next.js website for a development agency featuring stunning 3D animations, smooth transitions, and a dark theme with gradient accents.
 
@@ -51,7 +51,7 @@ npm start
 ## Project Structure
 
 ```
-DEVNEXT/
+TechniFuse/
 ├── app/
 │   ├── about/          # About page
 │   ├── services/       # Services pages

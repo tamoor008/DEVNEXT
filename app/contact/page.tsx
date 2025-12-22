@@ -85,8 +85,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Email</h3>
-                    <a href="mailto:hello@devnext.com" className="text-gray-400 hover:text-accent-primary transition-colors">
-                      hello@devnext.com
+                    <a href="mailto:hello@technifuse.com" className="text-gray-400 hover:text-accent-primary transition-colors">
+                      hello@technifuse.com
                     </a>
                   </div>
                 </motion.div>

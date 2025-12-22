@@ -8,7 +8,7 @@ const ceoData = {
   name: 'Alex Thompson',
   role: 'Chief Executive Officer & Founder',
   image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600',
-  bio: 'With over 15 years of experience in the tech industry, Alex founded DEVNEXT with a vision to transform how businesses interact with technology. His leadership has guided the company to become a trusted partner for innovative digital solutions.',
+  bio: 'With over 15 years of experience in the tech industry, Alex founded TechniFuse with a vision to transform how businesses interact with technology. His leadership has guided the company to become a trusted partner for innovative digital solutions.',
   quote: 'Innovation is not just about technology; it\'s about creating solutions that truly make a difference in people\'s lives.',
   achievements: [
     'Led 500+ successful projects',
@@ -18,7 +18,7 @@ const ceoData = {
   ],
   social: {
     linkedin: '#',
-    email: 'alex@devnext.com',
+    email: 'alex@technifuse.com',
   },
 };
 
@@ -41,7 +41,7 @@ export default function CEO() {
             <span className="gradient-text">Leadership</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Meet the visionary behind DEVNEXT
+            Meet the visionary behind TechniFuse
           </p>
         </motion.div>
 

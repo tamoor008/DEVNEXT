@@ -26,36 +26,51 @@ export default function Companies() {
 
         <div className="relative">
           {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-dark-200 to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-dark-200 to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-dark-200 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-dark-200 to-transparent z-10 pointer-events-none" />
 
-          <div className="flex space-x-12 overflow-hidden">
-            {[...companies, ...companies].map((company, index) => (
-              <motion.div
-                key={`${company}-${index}`}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                animate={{
-                  x: [0, -2400],
-                }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: 'loop',
-                    duration: 30,
-                    ease: 'linear',
-                  },
-                }}
-                className="flex-shrink-0"
-              >
-                <div className="px-8 py-4 rounded-xl bg-dark-300 border border-gray-800 hover:border-accent-primary/50 transition-all duration-300">
-                  <span className="text-xl font-semibold text-gray-400 hover:text-white transition-colors whitespace-nowrap">
-                    {company}
-                  </span>
+          <div className="overflow-hidden">
+            <motion.div
+              className="flex space-x-12"
+              animate={{
+                x: ['0%', '-50%'],
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                  duration: 10,
+                  ease: 'linear',
+                },
+              }}
+            >
+              {/* First set - visible */}
+              {companies.map((company, index) => (
+                <div
+                  key={`first-${company}-${index}`}
+                  className="flex-shrink-0"
+                >
+                  <div className="px-8 py-4 rounded-xl bg-dark-300 border border-gray-800 hover:border-accent-primary/50 transition-all duration-300">
+                    <span className="text-xl font-semibold text-gray-400 hover:text-white transition-colors whitespace-nowrap">
+                      {company}
+                    </span>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {companies.map((company, index) => (
+                <div
+                  key={`second-${company}-${index}`}
+                  className="flex-shrink-0"
+                >
+                  <div className="px-8 py-4 rounded-xl bg-dark-300 border border-gray-800 hover:border-accent-primary/50 transition-all duration-300">
+                    <span className="text-xl font-semibold text-gray-400 hover:text-white transition-colors whitespace-nowrap">
+                      {company}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </div>

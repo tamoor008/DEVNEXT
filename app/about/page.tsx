@@ -59,7 +59,7 @@ export default function About() {
           >
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
               <span className="text-white">About</span>{' '}
-              <span className="gradient-text">DEVNEXT</span>
+              <span className="gradient-text">TechniFuse</span>
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed">
               We are a passionate team of developers, designers, and innovators dedicated to creating

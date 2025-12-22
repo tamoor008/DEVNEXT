@@ -37,14 +37,14 @@ const showcases = [
 
 export default function Showcase() {
   return (
-    <section className="py-24 bg-dark-100 relative overflow-hidden">
+    <section className="pt-0 pb-24 bg-dark-100 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mt-16 mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">
             <span className="text-white">Showcasing</span>{' '}
