@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Calendar, ChevronDown, Smartphone, Globe, Palette, Code, Database, Cloud, Shield } from 'lucide-react';
@@ -53,10 +54,17 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className="text-2xl font-bold gradient-text"
+              whileHover={{ scale: 1.1 }}
+              className="relative h-16 w-auto"
             >
-              TechniFuse
+              <Image
+                src="/asset/techlogo.png"
+                alt="TechniFuse Logo"
+                width={400}
+                height={400}
+                className="h-full w-auto object-contain"
+                priority
+              />
             </motion.div>
           </Link>
 
