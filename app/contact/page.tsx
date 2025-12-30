@@ -16,15 +16,48 @@ export default function Contact() {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Formspree form endpoint for Contact Us form
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maqykpzb';
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    }, 3000);
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+          _subject: `New Contact Form Submission: ${formData.subject}`,
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 3000);
+      } else {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to send message. Please try again.');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -143,6 +176,15 @@ export default function Contact() {
               transition={{ duration: 0.8 }}
             >
               <form onSubmit={handleSubmit} className="space-y-6">
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 rounded-xl bg-red-500/10 border border-red-500/50 text-red-400 text-sm"
+                  >
+                    {error}
+                  </motion.div>
+                )}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -235,14 +277,24 @@ export default function Contact() {
                 >
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(99, 102, 241, 0.4)' }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full px-8 py-4 rounded-full bg-gradient-primary text-white font-semibold text-lg flex items-center justify-center space-x-2"
+                    disabled={isLoading || isSubmitted}
+                    whileHover={!isLoading && !isSubmitted ? { scale: 1.05, boxShadow: '0 20px 40px rgba(99, 102, 241, 0.4)' } : {}}
+                    whileTap={!isLoading && !isSubmitted ? { scale: 0.95 } : {}}
+                    className="w-full px-8 py-4 rounded-full bg-gradient-primary text-white font-semibold text-lg flex items-center justify-center space-x-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {isSubmitted ? (
                       <>
                         <CheckCircle className="w-5 h-5" />
                         <span>Message Sent!</span>
+                      </>
+                    ) : isLoading ? (
+                      <>
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                          className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                        />
+                        <span>Sending...</span>
                       </>
                     ) : (
                       <>

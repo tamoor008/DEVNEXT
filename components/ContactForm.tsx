@@ -16,6 +16,12 @@ export default function ContactForm() {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Formspree form endpoint for Get In Touch form (home page)
+  // Using the same form ID - create a separate form in Formspree if you want different submissions
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maqykpzb';
 
   const serviceOptions = [
     'App Development',
@@ -44,23 +50,54 @@ export default function ContactForm() {
     'Flexible / Not sure',
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        service: '',
-        budget: '',
-        timeline: '',
-        message: '',
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          service: formData.service,
+          budget: formData.budget,
+          timeline: formData.timeline,
+          message: formData.message,
+          _subject: `New Contact Form Submission from ${formData.name}`,
+        }),
       });
-    }, 3000);
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          service: '',
+          budget: '',
+          timeline: '',
+          message: '',
+        });
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 3000);
+      } else {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to send message. Please try again.');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -124,6 +161,15 @@ export default function ContactForm() {
               </div>
 
               <form onSubmit={handleSubmit} className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="md:col-span-2 p-4 rounded-xl bg-red-500/10 border border-red-500/50 text-red-400 text-sm"
+                  >
+                    {error}
+                  </motion.div>
+                )}
                 <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.1 }}>
                   <label className="block text-gray-300 mb-2 text-sm font-semibold">Full Name</label>
                   <input
@@ -262,14 +308,24 @@ export default function ContactForm() {
                 >
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.03, boxShadow: '0 20px 40px rgba(99, 102, 241, 0.35)' }}
-                    whileTap={{ scale: 0.97 }}
-                    className="w-full px-8 py-4 rounded-full bg-gradient-primary text-white font-semibold text-lg flex items-center justify-center space-x-2"
+                    disabled={isLoading || isSubmitted}
+                    whileHover={!isLoading && !isSubmitted ? { scale: 1.03, boxShadow: '0 20px 40px rgba(99, 102, 241, 0.35)' } : {}}
+                    whileTap={!isLoading && !isSubmitted ? { scale: 0.97 } : {}}
+                    className="w-full px-8 py-4 rounded-full bg-gradient-primary text-white font-semibold text-lg flex items-center justify-center space-x-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {isSubmitted ? (
                       <>
                         <CheckCircle className="w-5 h-5" />
                         <span>Message Sent!</span>
+                      </>
+                    ) : isLoading ? (
+                      <>
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                          className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                        />
+                        <span>Sending...</span>
                       </>
                     ) : (
                       <>
