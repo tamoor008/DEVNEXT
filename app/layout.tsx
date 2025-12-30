@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import FloatingButtons from "@/components/FloatingButtons";
 
 export const metadata: Metadata = {
   title: "TechniFuse - Premium Development Agency",
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <FloatingButtons />
+      </body>
     </html>
   );
 }

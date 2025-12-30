@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, Clock, ArrowRight } from 'lucide-react';
 
 const socialLinks = [
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/technifuse', label: 'LinkedIn' },
+  { icon: Instagram, href: 'https://www.instagram.com/technifuse/', label: 'Instagram' },
+  { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61585621269627', label: 'Facebook' },
 ];
 
 const quickLinks = [
@@ -24,24 +25,13 @@ function SpinningLogo() {
     <motion.div
       animate={{ rotate: 360 }}
       transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-      className="w-24 h-24 sm:w-28 sm:h-28 relative"
+      className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 relative flex items-center justify-center"
     >
-      <svg
-        viewBox="0 0 100 100"
-        className="w-full h-full text-white"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M50 10 L70 40 L50 50 L30 40 Z M50 50 L70 60 L50 90 L30 60 Z"
-          stroke="currentColor"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="50" cy="50" r="8" fill="currentColor" />
-      </svg>
+      <img
+        src="/footer1.png"
+        alt="TechniFuse Logo"
+        className="w-full h-full object-contain"
+      />
     </motion.div>
   );
 }

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Calendar, ChevronDown, Smartphone, Globe, Palette, Code, Database, Cloud, Shield } from 'lucide-react';
+import { Menu, X, Calendar, Mail, ChevronDown, Smartphone, Globe, Palette, Code, Database, Cloud, Shield } from 'lucide-react';
 
 const services = [
   { id: 'app-development', name: 'App Development', description: 'Native and cross-platform mobile applications', icon: Smartphone, href: '/services/app-development' },
@@ -210,8 +210,8 @@ export default function Header() {
                 href="/contact"
                 className="flex items-center space-x-2 px-6 py-2.5 rounded-full bg-gradient-primary text-white font-semibold hover:shadow-lg hover:shadow-accent-primary/50 transition-all duration-300"
               >
-                <Calendar className="w-4 h-4" />
-                <span>Book a Meeting</span>
+                <Mail className="w-4 h-4" />
+                <span>Contact us</span>
               </Link>
             </motion.div>
           </div>
@@ -237,7 +237,7 @@ export default function Header() {
             className="md:hidden bg-dark-200/98 backdrop-blur-md border-t border-gray-800"
           >
             <div className="container mx-auto px-4 py-6 space-y-4">
-              {/* Book a Meeting first */}
+              {/* Contact us first */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -248,8 +248,8 @@ export default function Header() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-center space-x-2 px-6 py-3 rounded-full bg-gradient-primary text-white font-semibold"
                 >
-                  <Calendar className="w-4 h-4" />
-                  <span>Book a Meeting</span>
+                  <Mail className="w-4 h-4" />
+                  <span>Contact us</span>
                 </Link>
               </motion.div>
 
