@@ -5,15 +5,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Download } from 'lucide-react';
 
-const projects = [
+import ProjectCard, { Project } from '@/components/ProjectCard';
+
+const projects: Project[] = [
   {
     id: 1,
     title: 'E-Commerce Platform',
     category: 'Web Development',
     description: 'A full-featured e-commerce platform with advanced shopping cart and payment integration',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
+    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Next.js', 'React', 'Stripe', 'MongoDB'],
     link: '#',
     github: '#',
@@ -25,6 +28,7 @@ const projects = [
     category: 'App Development',
     description: 'A comprehensive fitness tracking app with workout plans and progress monitoring',
     image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800',
+    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['React Native', 'Firebase', 'Redux'],
     link: '#',
     github: '#',
@@ -36,6 +40,7 @@ const projects = [
     category: 'UI/UX Design',
     description: 'Beautiful analytics dashboard for data visualization and business insights',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
+    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Figma', 'React', 'D3.js'],
     link: '#',
     github: '#',
@@ -46,7 +51,8 @@ const projects = [
     title: 'FinTech Solution',
     category: 'Software Development',
     description: 'Secure banking application with real-time transactions and fraud detection',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
+    image: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800',
+    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Node.js', 'PostgreSQL', 'AWS'],
     link: '#',
     github: '#',
@@ -57,7 +63,8 @@ const projects = [
     title: 'Healthcare Portal',
     category: 'Web Development',
     description: 'Patient management system with appointment scheduling and medical records',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800',
+    image: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=800',
+    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Vue.js', 'Laravel', 'MySQL'],
     link: '#',
     github: '#',
@@ -69,6 +76,7 @@ const projects = [
     category: 'App Development',
     description: 'Modern social networking app with real-time messaging and content sharing',
     image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800',
+    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Flutter', 'Firebase', 'GraphQL'],
     link: '#',
     github: '#',
@@ -80,16 +88,16 @@ const categories = ['All', 'Web Development', 'App Development', 'UI/UX Design',
 
 export default function Portfolio() {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects = selectedCategory === 'All'
     ? projects
     : projects.filter(project => project.category === selectedCategory);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-dark-100">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-dark-100 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_70%)]" />
@@ -121,11 +129,10 @@ export default function Portfolio() {
                 onClick={() => setSelectedCategory(category)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  selectedCategory === category
+                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${selectedCategory === category
                     ? 'bg-gradient-primary text-white'
                     : 'bg-dark-100 text-gray-400 border border-gray-800 hover:border-accent-primary'
-                }`}
+                  }`}
               >
                 {category}
               </motion.button>
@@ -147,67 +154,7 @@ export default function Portfolio() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="group relative"
-                >
-                  <div className="relative h-80 rounded-2xl overflow-hidden bg-dark-100 border border-gray-800 hover:border-accent-primary/50 transition-all duration-300 cursor-pointer"
-                    onClick={() => setSelectedProject(project)}
-                  >
-                    {/* Image */}
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute inset-0"
-                    >
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </motion.div>
-
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark-100 via-dark-100/80 to-transparent" />
-
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                      <div className="mb-3">
-                        <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${project.color} text-white text-sm font-semibold`}>
-                          {project.category}
-                        </span>
-                      </div>
-                      
-                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-accent-primary transition-colors">
-                        {project.title}
-                      </h3>
-                      
-                      <p className="text-gray-300 text-sm line-clamp-2">
-                        {project.description}
-                      </p>
-
-                      {/* Technologies */}
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {project.technologies.slice(0, 3).map((tech, idx) => (
-                          <span
-                            key={idx}
-                            className="px-2 py-1 rounded bg-dark-200/80 text-gray-300 text-xs"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Hover Glow */}
-                    <div className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`} />
-                  </div>
-                </motion.div>
+                <ProjectCard key={project.id} project={project} index={index} onSelect={() => setSelectedProject(project)} />
               ))}
             </motion.div>
           </AnimatePresence>
