@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import FloatingButtons from "@/components/FloatingButtons";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "TechniFuse - Premium Development Agency",
-  description: "We provide app development, website design, UI/UX, software solutions and cutting-edge tech services",
+  title: "TechniFuse | Premium Mobile App Agency for Brands",
+  description: "Transform your Shopify store or business into a powerful mobile app. Integrated AI assistance, push notifications, and zero technical headache—all with no initial cost.",
   icons: {
     icon: [
       { url: "/favicon.png", sizes: "16x16", type: "image/png" },
@@ -23,7 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <Header />
         {children}
+        <Footer />
         <FloatingButtons />
       </body>
     </html>

@@ -6,27 +6,27 @@ import { ShieldCheck, Sparkles, Gauge, Users } from 'lucide-react';
 const pillars = [
   {
     icon: Sparkles,
-    title: 'Design that converts',
-    description: 'UX-first approach with bold visuals, micro-interactions, and accessibility baked in.',
-    points: ['Research-driven UX', 'Animation & motion polish', 'Multi-device consistency'],
+    title: 'Zero Initial Cost',
+    description: 'Launch your premium mobile app with a simple subscription model. No heavy upfront development fees.',
+    points: ['Subscription-based model', 'No hidden setup costs', 'Scalable as you grow'],
   },
   {
     icon: Gauge,
-    title: 'Performance & reliability',
-    description: 'Next.js 14, edge-ready builds, and observability to keep experiences fast and stable.',
-    points: ['Core Web Vitals focused', 'Scalable cloud-native stacks', '24/7 monitoring & alerts'],
+    title: 'No Technical Headache',
+    description: 'We handle everything from server management to Play Store and App Store deployments and updates.',
+    points: ['Store deployment managed', 'Automated server scaling', 'Zero deployment errors'],
   },
   {
     icon: ShieldCheck,
-    title: 'Secure by default',
-    description: 'Security woven into every layer—from data to delivery pipelines.',
-    points: ['Security reviews & hardening', 'Compliance-ready practices', 'CI/CD with guardrails'],
+    title: 'Higher Brand Recall',
+    description: 'Stay top-of-mind with an app icon on your customers home screen, triggering daily engagement.',
+    points: ['Permanent home screen presence', 'Faster access than web', 'Offline availability'],
   },
   {
     icon: Users,
-    title: 'Partner-first delivery',
-    description: 'Transparent collaboration, rapid iterations, and measurable outcomes.',
-    points: ['Weekly demos & checkpoints', 'Outcome-based roadmaps', 'Post-launch growth support'],
+    title: 'Instant Retargeting',
+    description: 'Re-engage customers effortlessly with integrated push notifications and AI-driven suggestions.',
+    points: ['One-click push alerts', 'AI product suggestions', 'Seamless web-app sync'],
   },
 ];
 

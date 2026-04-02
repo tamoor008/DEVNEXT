@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import Image from 'next/image';
 import { ExternalLink, Github, Download } from 'lucide-react';
 
@@ -96,8 +94,6 @@ export default function Portfolio() {
 
   return (
     <main className="min-h-screen bg-dark-100">
-      <Header />
-
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-dark-100 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_70%)]" />
@@ -236,8 +232,6 @@ export default function Portfolio() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <Footer />
     </main>
   );
 }

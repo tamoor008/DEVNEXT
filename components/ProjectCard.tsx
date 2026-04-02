@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { Download } from 'lucide-react';
@@ -26,26 +26,45 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index, onSelect }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (isHovered) {
+      hoverTimeoutRef.current = setTimeout(() => {
+        setShowVideo(true);
+      }, 300); // 300ms debounce
+    } else {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+      setShowVideo(false);
+    }
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, [isHovered]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative"
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="group relative h-[450px]" // Fixed height to avoid layout shift
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
-        className="relative overflow-hidden bg-dark-100 border border-gray-800 hover:border-accent-primary/50 transition-all duration-500 cursor-pointer shadow-2xl rounded-2xl"
+        className="relative h-full w-full overflow-hidden bg-dark-100 border border-gray-800 hover:border-accent-primary/50 transition-colors duration-500 cursor-pointer shadow-2xl rounded-2xl"
         animate={{ 
-          height: isHovered ? 520 : 450,
-          scale: isHovered ? 1.15 : 1,
-          y: isHovered ? -35 : 0,
+          scale: isHovered ? 1.05 : 1, // Reduced scale for better performance
+          y: isHovered ? -10 : 0, // Reduced translation
           zIndex: isHovered ? 50 : 1
         }}
         transition={{ 
-          duration: 0.2, 
+          duration: 0.3, 
           ease: "easeOut" 
         }}
         onClick={onSelect}
@@ -55,16 +74,20 @@ export default function ProjectCard({ project, index, onSelect }: ProjectCardPro
           src={project.image}
           alt={project.title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={`object-cover transition-all duration-700 ${isHovered ? 'scale-110 opacity-30 blur-sm' : 'scale-100 opacity-100'}`}
         />
 
         {/* Video Background (Show immediately on hover) */}
         <AnimatePresence>
-          {isHovered && project.video && (
+        {/* Video Background (Show with debounce) */}
+        <AnimatePresence>
+          {showVideo && project.video && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
               className="absolute inset-0 z-30"
             >
               <video
@@ -77,6 +100,7 @@ export default function ProjectCard({ project, index, onSelect }: ProjectCardPro
               />
             </motion.div>
           )}
+        </AnimatePresence>
         </AnimatePresence>
 
         {/* Gradient Overlays - Only show when NOT playing video to allow clear view */}

@@ -2,8 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, Send, CheckCircle, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
@@ -69,7 +67,6 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen">
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-dark-100 relative overflow-hidden">
@@ -310,7 +307,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <Footer />
+
     </main>
   );
 }

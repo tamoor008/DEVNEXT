@@ -97,10 +97,10 @@ export default function Reviews() {
             {reviews.map((review, index) => (
               <motion.div
                 key={review.id}
-                initial={{ opacity: 0, y: 50, rotateY: -15 }}
-                whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
                 whileHover={{ 
                   y: -10,
                   rotateY: 5,
@@ -141,6 +141,7 @@ export default function Reviews() {
                         src={review.image}
                         alt={review.name}
                         fill
+                        sizes="48px"
                         className="object-cover"
                       />
                     </div>

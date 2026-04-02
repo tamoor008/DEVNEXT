@@ -1,8 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, CheckCircle } from 'lucide-react';
@@ -202,21 +200,19 @@ export default function ServiceDetail() {
   if (!service) {
     return (
       <main className="min-h-screen">
-        <Header />
         <div className="container mx-auto px-4 py-32 text-center">
           <h1 className="text-4xl font-bold text-white mb-4">Service Not Found</h1>
           <Link href="/services" className="text-accent-primary hover:underline">
             Back to Services
           </Link>
         </div>
-        <Footer />
+
       </main>
     );
   }
 
   return (
     <main className="min-h-screen">
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-dark-100 relative overflow-hidden">
@@ -396,7 +392,7 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      <Footer />
+
     </main>
   );
 }

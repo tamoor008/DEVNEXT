@@ -2,11 +2,9 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronDown, Smartphone, Globe, Palette, Code, Database, Cloud, Shield } from 'lucide-react';
+import { ChevronDown, Smartphone, Globe, Bot, Zap, Database, Cloud, Shield } from 'lucide-react';
 
 type Service = {
   id: string;
@@ -23,136 +21,98 @@ type Service = {
 
 const services: Service[] = [
   {
-    id: 'app-development',
-    title: 'App Development',
+    id: 'web-to-app',
+    title: 'Web-to-App Conversion',
     icon: Smartphone,
-    description: 'Native and cross-platform mobile applications',
+    description: 'Transform your existing Shopify or web store into a native mobile app.',
     color: 'from-blue-500 to-cyan-500',
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800',
     details: {
       features: [
-        'iOS & Android Native Development',
-        'React Native & Flutter Cross-Platform',
-        'Progressive Web Apps (PWA)',
-        'App Store Optimization',
-        'Performance Optimization',
-        'Maintenance & Support',
+        'Seamless Shopify & WooCommerce Sync',
+        'Native iOS & Android Experience',
+        'Real-time Catalog Updates',
+        'Fast & Secure Checkout Integration',
+        'Custom Branded UI/UX',
+        'Improved Conversion Rates',
       ],
-      technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Ionic'],
+      technologies: ['React Native', 'Shopify API', 'Node.js', 'REST/GraphQL', 'Firebase'],
     },
   },
   {
-    id: 'website-design',
-    title: 'Website Design',
+    id: 'standalone-apps',
+    title: 'Standalone Brand Apps',
     icon: Globe,
-    description: 'Responsive and SEO-optimized websites',
+    description: 'Custom mobile apps for brands looking for a dedicated digital presence.',
     color: 'from-purple-500 to-pink-500',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
     details: {
       features: [
-        'Responsive Web Design',
-        'E-Commerce Solutions',
-        'Content Management Systems',
-        'SEO Optimization',
-        'Performance Optimization',
-        'Security Implementation',
+        'Unique App-First Architecture',
+        'Custom Workflow Automation',
+        'In-App Community Features',
+        'Direct-to-Consumer Engagement',
+        'Offline Functionality',
+        'Personalized User Profiles',
       ],
-      technologies: ['Next.js', 'React', 'WordPress', 'Shopify', 'Node.js'],
+      technologies: ['Flutter', 'React Native', 'Next.js', 'PostgreSQL', 'Cloud Run'],
     },
   },
   {
-    id: 'ui-ux-design',
-    title: 'UI/UX Design',
-    icon: Palette,
-    description: 'Beautiful and intuitive user interfaces',
+    id: 'ai-integration',
+    title: 'AI Assistant Integration',
+    description: 'Intelligent assistants that resolve queries and suggest products.',
+    icon: Bot,
     color: 'from-pink-500 to-rose-500',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800',
+    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?w=800',
     details: {
       features: [
-        'User Research & Analysis',
-        'Wireframing & Prototyping',
-        'Visual Design',
-        'Interaction Design',
-        'Design Systems',
-        'Usability Testing',
+        '24/7 Automated Query Resolution',
+        'Personalized Product Recommendations',
+        'Natural Language Processing',
+        'Customer Intent Recognition',
+        'Automated Support Ticketing',
+        'Voice Search Capability',
       ],
-      technologies: ['Figma', 'Adobe XD', 'Sketch', 'InVision', 'Principle'],
+      technologies: ['OpenAI API', 'Vector Databases', 'Python', 'LangChain', 'FastAPI'],
     },
   },
   {
-    id: 'software-solutions',
-    title: 'Software Solutions',
-    icon: Code,
-    description: 'Custom software for your business',
+    id: 'retargeting',
+    title: 'Smart Retargeting & Push',
+    description: 'Boost engagement with automated notifications and reminders.',
+    icon: Zap,
     color: 'from-indigo-500 to-purple-500',
     image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800',
     details: {
       features: [
-        'Custom Software Development',
-        'Enterprise Solutions',
-        'API Development',
-        'System Integration',
-        'Cloud Migration',
-        'Legacy System Modernization',
+        'Instant Push Notifications',
+        'Automated Cart Recovery',
+        'Personalized Win-back Campaigns',
+        'Daily Engagement Triggers',
+        'Rich Media Notifications',
+        'Deep Linking to Products',
       ],
-      technologies: ['Python', 'Java', '.NET', 'Node.js', 'Docker'],
+      technologies: ['OneSignal', 'Firebase Cloud Messaging', 'Analytics', 'Edge Functions'],
     },
   },
   {
-    id: 'database-solutions',
-    title: 'Database Solutions',
-    icon: Database,
-    description: 'Efficient and scalable database systems',
-    color: 'from-green-500 to-emerald-500',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800',
-    details: {
-      features: [
-        'Database Design & Architecture',
-        'Data Migration',
-        'Performance Tuning',
-        'Backup & Recovery',
-        'Data Security',
-        'Real-time Analytics',
-      ],
-      technologies: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Elasticsearch'],
-    },
-  },
-  {
-    id: 'cloud-services',
-    title: 'Cloud Services',
-    icon: Cloud,
-    description: 'Scalable cloud infrastructure',
-    color: 'from-cyan-500 to-blue-500',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800',
-    details: {
-      features: [
-        'Cloud Architecture Design',
-        'AWS/Azure/GCP Setup',
-        'DevOps Implementation',
-        'Auto-scaling Solutions',
-        'Cost Optimization',
-        '24/7 Monitoring',
-      ],
-      technologies: ['AWS', 'Azure', 'GCP', 'Kubernetes', 'Terraform'],
-    },
-  },
-  {
-    id: 'cybersecurity',
-    title: 'Cybersecurity',
+    id: 'managed-ecosystem',
+    title: 'Managed App Ecosystem',
     icon: Shield,
-    description: 'Protect your digital assets',
+    description: 'Zero technical headache—we handle servers and deployments.',
     color: 'from-red-500 to-orange-500',
     image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800',
     details: {
       features: [
-        'Security Audits',
-        'Penetration Testing',
-        'Vulnerability Assessment',
-        'Security Implementation',
-        'Compliance (GDPR, HIPAA)',
-        'Incident Response',
+        'Play Store & App Store Management',
+        'Managed Server Infrastructure',
+        'Automated Security Updates',
+        'Zero Deployment Errors',
+        'Regular Performance Audits',
+        'Dedicated Support Team',
       ],
-      technologies: ['OWASP', 'SSL/TLS', 'Firewalls', 'SIEM', 'Encryption'],
+      technologies: ['Docker', 'Kubernetes', 'CI/CD Pipelines', 'AWS/GCP', 'Terraform'],
     },
   },
 ];
@@ -409,7 +369,6 @@ export default function Services() {
 
   return (
     <main className="min-h-screen">
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-dark-100 relative overflow-hidden">
@@ -421,12 +380,12 @@ export default function Services() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="text-white">Our</span>{' '}
-              <span className="gradient-text">Services</span>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-balance">
+              <span className="text-white">Our App</span>{' '}
+              <span className="gradient-text">Ecosystem</span>
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed">
-              Comprehensive tech solutions tailored to your business needs
+              Powerful mobile solutions with integrated AI, advanced retargeting, and zero technical management.
             </p>
           </motion.div>
         </div>
@@ -445,7 +404,7 @@ export default function Services() {
         </div>
       </section>
 
-      <Footer />
+
     </main>
   );
 }

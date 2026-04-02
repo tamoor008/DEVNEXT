@@ -1,8 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import CEO from '@/components/CEO';
 import Image from 'next/image';
 import { Target, Eye, Users, Award } from 'lucide-react';
@@ -11,41 +9,40 @@ const values = [
   {
     icon: Target,
     title: 'Our Mission',
-    description: 'To empower businesses with cutting-edge digital solutions that drive growth and innovation.',
+    description: 'To bridge the gap between brands and their customers through high-performance, integrated mobile apps.',
     color: 'from-blue-500 to-cyan-500',
   },
   {
     icon: Eye,
     title: 'Our Vision',
-    description: 'To be the leading development agency recognized for excellence, creativity, and client success.',
+    description: 'To build the world largest managed app ecosystem, where every brand can have a premium app with zero initial cost.',
     color: 'from-purple-500 to-pink-500',
   },
   {
     icon: Users,
-    title: 'Our Team',
-    description: 'A talented group of developers, designers, and strategists passionate about creating exceptional digital experiences.',
+    title: 'No-Headache Tech',
+    description: 'We handle the complexity of servers, deployments, and store management so you can focus on your brand.',
     color: 'from-pink-500 to-rose-500',
   },
   {
     icon: Award,
-    title: 'Our Values',
-    description: 'Quality, innovation, integrity, and client satisfaction are at the core of everything we do.',
+    title: 'Subscription Model',
+    description: 'Democratizing premium app development with a zero-upfront, success-aligned subscription model.',
     color: 'from-indigo-500 to-purple-500',
   },
 ];
 
 const timeline = [
-  { year: '2020', event: 'Company Founded', description: 'Started with a vision to transform digital experiences' },
-  { year: '2021', event: 'First 100 Clients', description: 'Reached milestone of serving 100 satisfied clients' },
-  { year: '2022', event: 'Award Recognition', description: 'Won Best Development Agency of the Year' },
-  { year: '2023', event: 'Global Expansion', description: 'Expanded services to international markets' },
-  { year: '2024', event: 'Innovation Leader', description: 'Recognized as industry leader in digital innovation' },
+  { year: '2022', event: 'TechniFuse Founded', description: 'Started as a boutique web agency with a focus on D2C brands.' },
+  { year: '2023', event: 'App Pivot', description: 'Recognized the need for high-recall brand apps and shifted focus to mobile.' },
+  { year: '2024', event: 'Managed Ecosystem Launch', description: 'Introduced the fully managed, zero-upfront subscription model.' },
+  { year: '2025', event: 'AI Integration', description: 'Built-in proprietary AI assistants to enhance in-app customer support.' },
+  { year: '2026', event: 'Global App Network', description: 'Managing hundreds of brand apps across Shopify and custom stacks.' },
 ];
 
 export default function About() {
   return (
     <main className="min-h-screen">
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-dark-100 relative overflow-hidden">
@@ -245,7 +242,7 @@ export default function About() {
       {/* CEO Section */}
       <CEO />
 
-      <Footer />
+
     </main>
   );
 }

@@ -7,31 +7,31 @@ import { ExternalLink } from 'lucide-react';
 const showcases = [
   {
     id: 1,
-    title: 'E-Commerce Platform',
-    description: 'A revolutionary shopping experience with seamless checkout',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
-    category: 'Web Development',
+    title: 'Velour Concept Store',
+    description: 'A seamless Shopify-to-App conversion with integrated AI styling assistant.',
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800',
+    category: 'Shopify-to-App',
   },
   {
     id: 2,
-    title: 'Fitness Mobile App',
-    description: 'Track your workouts and achieve your fitness goals',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800',
-    category: 'App Development',
+    title: 'Pulse Fitness Hub',
+    description: 'A standalone brand app featuring real-time push tracking and AI workout suggestions.',
+    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800',
+    category: 'Brand App',
   },
   {
     id: 3,
-    title: 'SaaS Dashboard',
-    description: 'Beautiful analytics dashboard for data-driven decisions',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
-    category: 'UI/UX Design',
+    title: 'Glow Skincare',
+    description: 'D2C app with advanced retargeting and personalized skincare AI assistant.',
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800',
+    category: 'AI-Integrated',
   },
   {
     id: 4,
-    title: 'FinTech Solution',
-    description: 'Secure and intuitive banking application',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
-    category: 'Software Development',
+    title: 'Zest Grocery',
+    description: 'High-recall retail app with instant stock alerts and smart cart integration.',
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800',
+    category: 'Managed App',
   },
 ];
 
@@ -62,7 +62,7 @@ export default function Showcase() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
               whileHover={{ scale: 1.02 }}
               className="group relative"
             >
@@ -77,6 +77,7 @@ export default function Showcase() {
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                   />
                 </motion.div>

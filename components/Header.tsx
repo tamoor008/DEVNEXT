@@ -28,9 +28,11 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesHovered, setIsServicesHovered] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -40,7 +42,7 @@ export default function Header() {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
+      initial={mounted ? { y: -100 } : { y: 0 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -84,14 +86,13 @@ export default function Header() {
               >
                 Home
               </motion.span>
-              <motion.div
-                className={`absolute bottom-0 left-0 h-0.5 bg-gradient-primary transition-all duration-300 ${
-                  pathname === '/' 
-                    ? 'w-full' 
-                    : 'w-0 group-hover:w-full'
-                }`}
-                initial={false}
-              />
+              {pathname === '/' && (
+                <motion.div
+                  layoutId="desktop-active-indicator"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
             </Link>
 
             {/* Services Dropdown */}
@@ -111,14 +112,13 @@ export default function Header() {
                   <span>Services</span>
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isServicesHovered ? 'rotate-180' : ''}`} />
                 </span>
-                <motion.div
-                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-primary transition-all duration-300 ${
-                    pathname.startsWith('/services') 
-                      ? 'w-full' 
-                      : 'w-0 group-hover:w-full'
-                  }`}
-                  initial={false}
-                />
+                {pathname.startsWith('/services') && (
+                  <motion.div
+                    layoutId="desktop-active-indicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </div>
 
               {/* Invisible Bridge to prevent gap */}
@@ -194,14 +194,13 @@ export default function Header() {
                   >
                     {item.name}
                   </motion.span>
-                  <motion.div
-                    className={`absolute bottom-0 left-0 h-0.5 bg-gradient-primary transition-all duration-300 ${
-                      isActive 
-                        ? 'w-full' 
-                        : 'w-0 group-hover:w-full'
-                    }`}
-                    initial={false}
-                  />
+                  {isActive && (
+                    <motion.div
+                      layoutId="desktop-active-indicator"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </Link>
               );
             })}
