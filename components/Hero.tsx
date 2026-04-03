@@ -1,10 +1,17 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ArrowRight, Sparkles, Smartphone, Globe, Bot, Zap } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Sparkles, Smartphone, Globe, Bot, Zap } from 'lucide-react';
 import Link from 'next/link';
-import { useRef } from 'react';
 import Image from 'next/image';
+import { useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// Next.js dynamic import to disable Server-Side Rendering (SSR) for the Three.js Canvas
+// This prevents 'Cannot read properties of undefined (reading 'S')' and other hydration errors
+const IPhone3D = dynamic(() => import('./IPhone3D'), {
+  ssr: false,
+});
 
 const services = [
   {
@@ -40,73 +47,56 @@ const services = [
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // We explicitly track when the 3D mobile is completely loaded to remove out the splash screen.
+  const [modelLoaded, setModelLoaded] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  const spring = useSpring(scrollYProgress, { stiffness: 80, damping: 30, restDelta: 0.001 });
-
   // ── TRANSFORMS ────────────────────────────────────────────────────────
-  // Animate during 0→0.85 of scroll, then LOCK in place — phone arrives as user reaches Ecosystem
-  const phoneX = useTransform(spring, [0, 0.85, 1], ['26vw', '-28vw', '-28vw']);
-  const phoneY = useTransform(spring, [0, 0.85, 1], ['0vh', '106vh', '106vh']); // Lock at cards midpoint
-
-  const rotateY = useTransform(spring, [0, 0.85, 1], [-28, 12, 12]);
-  const rotateX = useTransform(spring, [0, 0.85, 1], [14, 0, 0]);
-  const rotateZ = useTransform(spring, [0, 0.85, 1], [-10, 3, 3]);
-  const phoneScale = useTransform(spring, [0, 0.85, 1], [1.12, 1.0, 1.0]);
-  const phoneOpacity = useTransform(spring, [0, 1], [1, 1]); // Always visible
-
-  // Screen content transitions
-  const storeOpacity = useTransform(spring, [0.35, 0.60], [1, 0]);
-  const aiOpacity = useTransform(spring, [0.55, 0.75], [0, 1]);
+  // Position animations — from Hero center to Ecosystem side.
+  // X: Slides smoothly from right to left
+  const phoneX = useTransform(scrollYProgress, [0, 0.85, 1], ['18vw', '-28vw', '-28vw']);
+  const phoneY = useTransform(scrollYProgress, [0, 0.85, 1], ['0vh', '106vh', '106vh']);
+  const phoneOpacity = useTransform(scrollYProgress, [0, 1], [1, 1]);
 
   return (
     <section ref={containerRef} className="relative w-full z-10 bg-dark-50">
 
+      {/* ── FULL SCREEN LOADING OVERLAY ── */}
+      {/* Deep Dark Purple background with spinning physical favicon */}
+      <div
+        className={`fixed inset-0 z-[99999] bg-[#1a0a2e] flex flex-col items-center justify-center transition-all duration-1000 ease-in-out ${modelLoaded ? 'opacity-0 pointer-events-none invisible' : 'opacity-100 visible'
+          }`}
+      >
+        <div className="relative w-24 h-24 animate-[spin_3s_linear_infinite]">
+          <Image
+            src="/footer1.png"
+            alt="TechniFuse Logo Loader"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+      </div>
+
       {/* ── STICKY PHONE ── */}
       <div className="absolute inset-0 pointer-events-none z-[60] hidden lg:block">
-        <div className="sticky top-0 h-screen flex items-center justify-center" style={{ perspective: '1800px' }}>
+        <div className="sticky top-0 h-screen flex items-center justify-center">
           <motion.div
             style={{
               x: phoneX,
               y: phoneY,
-              rotateY,
-              rotateX,
-              rotateZ,
-              scale: phoneScale,
               opacity: phoneOpacity,
-              transformStyle: 'preserve-3d',
             }}
-            className="w-[330px] relative pointer-events-auto will-change-transform transform-gpu"
+            // Increase canvas width to 600px so it naturally doesn't clip 
+            className="w-[600px] h-[800px] relative pointer-events-none flex items-center justify-center"
           >
-            {/* iPhone Chassis */}
-            <div style={{ transformStyle: 'preserve-3d' }} className="relative w-full aspect-[9/19.5]">
-              {/* FRONT */}
-              <div
-                style={{ transform: 'translateZ(9px)', border: '1.5px solid #333' }}
-                className="absolute inset-0 rounded-[3rem] bg-[#060606] overflow-hidden z-10"
-              >
-                <div className="absolute inset-[4px] rounded-[2.7rem] overflow-hidden bg-black">
-                  <div className="absolute top-[10px] inset-x-0 flex justify-center z-50">
-                    <div className="w-[88px] h-[26px] bg-black rounded-full border border-white/5 flex items-center justify-end px-2 gap-1">
-                      <div className="w-[8px] h-[8px] rounded-full bg-[#111]" />
-                    </div>
-                  </div>
-                  <motion.div style={{ opacity: storeOpacity }} className="absolute inset-0">
-                    <Image src="/flat-store.png" alt="Store App" fill className="object-cover object-top" priority />
-                  </motion.div>
-                  <motion.div style={{ opacity: aiOpacity }} className="absolute inset-0">
-                    <Image src="/flat-ai.png" alt="AI Assistant" fill className="object-cover object-top" />
-                  </motion.div>
-                </div>
-              </div>
-              {/* BACK */}
-              <div
-                style={{ transform: 'translateZ(-9px) rotateY(180deg)', border: '1px solid #1c1c1c' }}
-                className="absolute inset-0 rounded-[3rem] bg-gradient-to-br from-[#1a1c1e] to-[#0a0a0c] overflow-hidden"
-              />
+            {/* Real WebGL iPhone 3D */}
+            <div className="relative w-full h-full pointer-events-auto">
+              <IPhone3D scrollProgress={scrollYProgress} onLoad={() => setModelLoaded(true)} />
             </div>
           </motion.div>
         </div>
