@@ -58,8 +58,8 @@ export default function Hero() {
   // ── TRANSFORMS ────────────────────────────────────────────────────────
   // Position animations — from Hero center to Ecosystem side.
   // X: Slides smoothly from right to left
-  const phoneX = useTransform(scrollYProgress, [0, 0.85, 1], ['18vw', '-28vw', '-28vw']);
-  const phoneY = useTransform(scrollYProgress, [0, 0.85, 1], ['0vh', '106vh', '106vh']);
+  const phoneX = useTransform(scrollYProgress, [0, 0.85, 1], ['25vw', '-30vw', '-30vw']);
+  const phoneY = useTransform(scrollYProgress, [0, 0.85, 1], ['8vh', '115vh', '115vh']);
   const phoneOpacity = useTransform(scrollYProgress, [0, 1], [1, 1]);
 
   return (
