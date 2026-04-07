@@ -95,23 +95,6 @@ export default function Hero() {
   return (
     <section ref={containerRef} className="relative w-full z-10 bg-dark-50" style={{ '--track-drag': `${trackDrag}px` } as React.CSSProperties}>
 
-      {/* ── FULL SCREEN LOADING OVERLAY ── */}
-      {/* Deep Dark Purple background with spinning physical favicon */}
-      <div
-        className={`fixed inset-0 z-[99999] bg-[#1a0a2e] flex flex-col items-center justify-center transition-all duration-1000 ease-in-out ${modelLoaded ? 'opacity-0 pointer-events-none invisible' : 'opacity-100 visible'
-          }`}
-      >
-        <div className="relative w-24 h-24 animate-[spin_3s_linear_infinite]">
-          <Image
-            src="/footer1.png"
-            alt="TechniFuse Logo Loader"
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
-      </div>
-
       {/* ── STICKY PHONE ── */}
       <div className="absolute inset-0 pointer-events-none z-[60] hidden lg:block">
         <div className="sticky top-0 h-[100vh] min-h-[800px] flex items-center justify-center">
@@ -123,9 +106,17 @@ export default function Hero() {
             }}
             className="w-[600px] h-[800px] relative pointer-events-none flex items-center justify-center -mr-[50px] lg:-mr-0"
           >
+            {/* Localized 3D Loader — Site remains visible while model parses */}
+            {!modelLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-[70] transition-opacity duration-500">
+                <div className="relative w-16 h-16 animate-spin opacity-40">
+                  <Image src="/footer1.png" alt="Model Loader" fill className="object-contain grayscale" />
+                </div>
+              </div>
+            )}
 
             {/* Real WebGL iPhone 3D */}
-            <div className="relative w-full h-full pointer-events-auto">
+            <div className={`relative w-full h-full pointer-events-auto transition-opacity duration-1000 ${modelLoaded ? 'opacity-100' : 'opacity-0'}`}>
               <IPhone3D scrollProgress={scrollYProgress} onLoad={handleModelLoad} />
             </div>
           </motion.div>

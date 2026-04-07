@@ -70,7 +70,7 @@ function PhoneModel({
   }, [originalScene]);
 
   // Load textures: 0: flat-store, 1: flat-store1, 2: flat-store2
-  const textures = useLoader(TextureLoader, ['/flat-store.png', '/flat-store1.png', '/flat-store2.png']);
+  const textures = useLoader(TextureLoader, ['/flat-store.jpg', '/flat-store1.jpg', '/flat-store2.jpg']);
   const [activeTextureIndex, setActiveTextureIndex] = useState(0);
   const [nextTextureIndex, setNextTextureIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
