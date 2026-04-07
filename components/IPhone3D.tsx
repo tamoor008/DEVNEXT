@@ -54,7 +54,8 @@ function PhoneModel({
   onLoad?: () => void;
 }) {
   const groupRef = useRef<THREE.Group>(null!);
-  const { scene: originalScene } = useGLTF('/iphone14.glb');
+  // ⚡ SPEED: Using the 800KB Draco-compressed model with a high-performance CDN decoder
+  const { scene: originalScene } = useGLTF('/iphone14-compressed.glb', 'https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
   const { gl, camera } = useThree();
 
   const scene = useMemo(() => {
@@ -88,7 +89,7 @@ function PhoneModel({
       texture.generateMipmaps = true;
       texture.minFilter = THREE.LinearMipmapLinearFilter;
       texture.magFilter = THREE.LinearFilter;
-      texture.anisotropy = gl.capabilities.getMaxAnisotropy();
+      texture.anisotropy = Math.min(gl.capabilities.getMaxAnisotropy(), 4);
       texture.wrapS = THREE.RepeatWrapping; // Essential for the sliding UV math
       texture.wrapT = THREE.ClampToEdgeWrapping;
       texture.repeat.set(1, 1);
@@ -203,19 +204,26 @@ export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
     <Canvas
       style={{ width: '100%', height: '100%', background: 'transparent' }}
       camera={{ position: [0, 0, 4.5], fov: 38 }}
-      dpr={[1, 2]} 
-      gl={{ antialias: true, alpha: true }}
+      // ⚡ SPEED: Capping DPR at 1.5 cuts GPU workload by 50% on Retina while staying sharp
+      dpr={[1, 1.5]} 
+      gl={{ 
+        antialias: true, 
+        alpha: true,
+        powerPreference: "high-performance" // ⚡ Demand the best from the local GPU
+      }}
       onCreated={({ gl }) => {
         gl.outputColorSpace = THREE.SRGBColorSpace;
         gl.toneMapping = THREE.NoToneMapping; 
       }}
     >
       <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} makeDefault />
+      
+      {/* ⚡ SPEED: Using lightweight light rig instead of heavy HDR Environment downloads */}
       <ambientLight intensity={0.4} />
       <directionalLight position={[4, 8, 5]} intensity={1.6} />
       <directionalLight position={[-4, 2, -4]} intensity={0.5} color="#8899ff" />
       <pointLight position={[0, -3, 3]} intensity={0.8} />
-      <Environment preset="city" />
+
       <ContactShadows position={[0, -2.1, 0]} opacity={0.5} scale={6} blur={2.5} far={4} />
       <Suspense fallback={null}>
         <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
