@@ -195,6 +195,9 @@ interface IPhone3DProps {
   onLoad?: () => void;
 }
 
+// ⚡ PRELOAD: Force the browser to start downloading these heavy assets as soon as the script parses
+useGLTF.preload('/iphone14-compressed.glb', 'https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+
 export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
   const rotY = useTransform(scrollProgress, [0, 0.85], [Math.PI * 2, Math.PI / 5]);
   const rotX = useTransform(scrollProgress, [0, 0.85], [0.24, 0.4]);
