@@ -1,10 +1,10 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion';
 import { Sparkles, Smartphone, Globe, Bot, Zap } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 
 // Next.js dynamic import to disable Server-Side Rendering (SSR) for the Three.js Canvas
@@ -45,10 +45,35 @@ const services = [
 ];
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // We explicitly track when the 3D mobile is completely loaded to remove out the splash screen.
+  const containerRef = useRef<HTMLElement>(null);
   const [modelLoaded, setModelLoaded] = useState(false);
+  const [trackDrag, setTrackDrag] = useState(0);
+
+  // Memoize the onLoad function to prevent the 3D component from resetting on every parent render.
+  const handleModelLoad = useCallback(() => {
+    setModelLoaded(true);
+  }, []);
+
+  // Dynamically calculate the EXACT DOM track drag for flawless 3D phone alignment on all screen sizes
+  useEffect(() => {
+    const updateCalculations = () => {
+      if (containerRef.current) {
+        const sectionHeight = containerRef.current.offsetHeight;
+        // The sticky container uses h-[100vh] maxed at 800px
+        const stickyHeight = Math.max(window.innerHeight, 800);
+        setTrackDrag(Math.max(0, sectionHeight - stickyHeight));
+      }
+    };
+
+    updateCalculations();
+    window.addEventListener('resize', updateCalculations);
+    const timeoutId = setTimeout(updateCalculations, 500); // Check again after fonts/layouts settle
+
+    return () => {
+      window.removeEventListener('resize', updateCalculations);
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -57,13 +82,18 @@ export default function Hero() {
 
   // ── TRANSFORMS ────────────────────────────────────────────────────────
   // Position animations — from Hero center to Ecosystem side.
-  // X: Slides smoothly from right to left
+  // X: Flawless diagonal slide matching 3D rotation exactly
   const phoneX = useTransform(scrollYProgress, [0, 0.85, 1], ['25vw', '-30vw', '-30vw']);
-  const phoneY = useTransform(scrollYProgress, [0, 0.85, 1], ['8vh', '115vh', '115vh']);
+  // Y: Calculate exact drop to Smart Retargeting natively via browser CSS engine using our exact DOM drag metric!
+  const phoneYProgress = useTransform(scrollYProgress, [0, 0.85, 1], [0, 1, 1]);
+  // 120px starting anchor + seamlessly progressing down through the drag + an exact targeted 80px drop
+  const phoneY = useMotionTemplate`calc(120px + (${phoneYProgress} * (var(--track-drag) - 70px)))`;
+
+  // Opacity: Never disappear.
   const phoneOpacity = useTransform(scrollYProgress, [0, 1], [1, 1]);
 
   return (
-    <section ref={containerRef} className="relative w-full z-10 bg-dark-50">
+    <section ref={containerRef} className="relative w-full z-10 bg-dark-50" style={{ '--track-drag': `${trackDrag}px` } as React.CSSProperties}>
 
       {/* ── FULL SCREEN LOADING OVERLAY ── */}
       {/* Deep Dark Purple background with spinning physical favicon */}
@@ -84,26 +114,26 @@ export default function Hero() {
 
       {/* ── STICKY PHONE ── */}
       <div className="absolute inset-0 pointer-events-none z-[60] hidden lg:block">
-        <div className="sticky top-0 h-screen flex items-center justify-center">
+        <div className="sticky top-0 h-[100vh] min-h-[800px] flex items-center justify-center">
           <motion.div
             style={{
               x: phoneX,
               y: phoneY,
               opacity: phoneOpacity,
             }}
-            // Increase canvas width to 600px so it naturally doesn't clip 
-            className="w-[600px] h-[800px] relative pointer-events-none flex items-center justify-center"
+            className="w-[600px] h-[800px] relative pointer-events-none flex items-center justify-center -mr-[50px] lg:-mr-0"
           >
+
             {/* Real WebGL iPhone 3D */}
             <div className="relative w-full h-full pointer-events-auto">
-              <IPhone3D scrollProgress={scrollYProgress} onLoad={() => setModelLoaded(true)} />
+              <IPhone3D scrollProgress={scrollYProgress} onLoad={handleModelLoad} />
             </div>
           </motion.div>
         </div>
       </div>
 
       {/* ── HERO CONTENT ── */}
-      <div className="relative min-h-screen flex items-center pt-24 pb-12">
+      <div className="relative h-[100vh] min-h-[800px] flex items-center pt-24 pb-12">
         <div className="container mx-auto px-4 relative z-20">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center">
             <div className="w-full lg:w-1/2 text-center lg:text-left">
