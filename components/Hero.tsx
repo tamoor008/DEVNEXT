@@ -83,11 +83,13 @@ export default function Hero() {
   // ── TRANSFORMS ────────────────────────────────────────────────────────
   // Position animations — from Hero center to Ecosystem side.
   // X: Flawless diagonal slide matching 3D rotation exactly
-  const phoneX = useTransform(scrollYProgress, [0, 0.85, 1], ['25vw', '-30vw', '-30vw']);
+  // Add a 5% dead-zone to prevent initial jitter/upscale on start of scroll
+  const phoneX = useTransform(scrollYProgress, [0, 0.05, 0.85, 1], ['25vw', '25vw', '-30vw', '-30vw']);
   // Y: Calculate exact drop to Smart Retargeting natively via browser CSS engine using our exact DOM drag metric!
-  const phoneYProgress = useTransform(scrollYProgress, [0, 0.85, 1], [0, 1, 1]);
+  const phoneYProgress = useTransform(scrollYProgress, [0, 0.05, 0.85, 1], [0, 0, 1, 1]);
   // 120px starting anchor + seamlessly progressing down through the drag + an exact targeted 80px drop
-  const phoneY = useMotionTemplate`calc(120px + (${phoneYProgress} * (var(--track-drag) - 70px)))`;
+  // Reduced base offset from 120px to 80px to move it up.
+  const phoneY = useMotionTemplate`calc(80px + (${phoneYProgress} * (var(--track-drag) - 70px)))`;
 
   // Opacity: Never disappear.
   const phoneOpacity = useTransform(scrollYProgress, [0, 1], [1, 1]);
@@ -116,10 +118,19 @@ export default function Hero() {
             )}
 
 
-            {/* Real WebGL iPhone 3D */}
-            <div className={`relative w-full h-full pointer-events-auto transition-all duration-1000 ease-out ${modelLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-95 blur-md'}`}>
+            {/* Real WebGL iPhone 3D with Framer Motion entry to prevent CSS transition conflicts */}
+            <motion.div 
+              initial={false}
+              animate={{ 
+                opacity: modelLoaded ? 1 : 0,
+                scale: 1, // Fixed at 1 to completely eliminate any upscale effect
+                filter: modelLoaded ? 'blur(0px)' : 'blur(10px)'
+              }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="relative w-full h-full pointer-events-auto"
+            >
               <IPhone3D scrollProgress={scrollYProgress} onLoad={handleModelLoad} />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

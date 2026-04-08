@@ -47,12 +47,14 @@ function PhoneModel({
   rotZ,
   onLoad,
   isMobile,
+  scrollProgress,
 }: {
   rotY: MotionValue<number>;
   rotX: MotionValue<number>;
   rotZ: MotionValue<number>;
   onLoad?: () => void;
   isMobile: boolean;
+  scrollProgress: MotionValue<number>;
 }) {
   const groupRef = useRef<THREE.Group>(null!);
   // ⚡ SPEED: Using the 800KB Draco-compressed model with a high-performance CDN decoder
@@ -74,7 +76,9 @@ function PhoneModel({
   // ⚡ SPEED: Load only the FIRST texture immediately for instant render
   const texture0 = useTexture('/flat-store.jpg');
   // Secondary textures load in the background without blocking initial mount
-  const textures = useTexture(['/flat-store.jpg', '/flat-store1.jpg', '/flat-store2.jpg']);
+  // Memoize the array literal to prevent infinite re-renders of the PhoneModel
+  const textureFiles = useMemo(() => ['/flat-store.jpg', '/flat-store1.jpg', '/flat-store2.jpg'], []);
+  const textures = useTexture(textureFiles);
 
   const [activeTextureIndex, setActiveTextureIndex] = useState(0);
   const [nextTextureIndex, setNextTextureIndex] = useState(1);
@@ -161,9 +165,21 @@ function PhoneModel({
     if (!groupRef.current) return;
 
     // 1. Smooth rotation tracking
-    groupRef.current.rotation.y += (rotY.get() - groupRef.current.rotation.y) * 0.08;
-    groupRef.current.rotation.x += (rotX.get() - groupRef.current.rotation.x) * 0.08;
-    groupRef.current.rotation.z += (rotZ.get() - groupRef.current.rotation.z) * 0.08;
+    // For the very first frame or if the target is close, snap to avoid lerping jitter/upscale feel
+    const targetY = rotY.get();
+    const targetX = rotX.get();
+    const targetZ = rotZ.get();
+
+    // Snap if we're near the beginning of scroll to ensure perfect stillness
+    if (Math.abs(groupRef.current.rotation.y - targetY) > 0.1 || scrollProgress.get() <= 0.01) {
+      groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * 0.15;
+      groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * 0.15;
+      groupRef.current.rotation.z += (targetZ - groupRef.current.rotation.z) * 0.15;
+    } else {
+      groupRef.current.rotation.y = targetY;
+      groupRef.current.rotation.x = targetX;
+      groupRef.current.rotation.z = targetZ;
+    }
 
     // 2. Animate sliding transition shader
     if (isTransitioning && shaderMatRef.current) {
@@ -185,9 +201,11 @@ function PhoneModel({
 
   return (
     <group ref={groupRef}>
-      <Center rotation={[0, Math.PI, 0]}>
-        <primitive object={scene} scale={15} />
-      </Center>
+      {/* 
+          Manual centering instead of <Center /> to eliminate bounding-box re-calculation jitter 
+          during rotation which can cause a "pulse" or "upscale" effect.
+      */}
+      <primitive object={scene} scale={15} rotation={[0, Math.PI, 0]} position={[0, -1.4, 0]} />
     </group>
   );
 }
@@ -215,9 +233,10 @@ export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const rotY = useTransform(scrollProgress, [0, 0.85], [Math.PI * 2, Math.PI / 5]);
-  const rotX = useTransform(scrollProgress, [0, 0.85], [0.24, 0.4]);
-  const rotZ = useTransform(scrollProgress, [0, 0.85], [-0.17, -0.15]);
+  // Add a 5% dead-zone to match the Hero movement transforms and prevent initial jitters
+  const rotY = useTransform(scrollProgress, [0, 0.05, 0.85], [Math.PI * 2, Math.PI * 2, Math.PI / 5]);
+  const rotX = useTransform(scrollProgress, [0, 0.05, 0.85], [0.24, 0.24, 0.4]);
+  const rotZ = useTransform(scrollProgress, [0, 0.05, 0.85], [-0.17, -0.17, -0.15]);
 
   return (
     <Canvas
@@ -254,7 +273,14 @@ export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
         />
 
         <Float speed={isMobile ? 1.5 : 2} rotationIntensity={0.2} floatIntensity={0.5}>
-          <PhoneModel rotY={rotY} rotX={rotX} rotZ={rotZ} onLoad={onLoad} isMobile={isMobile} />
+          <PhoneModel 
+            rotY={rotY} 
+            rotX={rotX} 
+            rotZ={rotZ} 
+            onLoad={onLoad} 
+            isMobile={isMobile} 
+            scrollProgress={scrollProgress}
+          />
         </Float>
       </Suspense>
     </Canvas>
