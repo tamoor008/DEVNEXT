@@ -75,11 +75,11 @@ function PhoneModel({
   const texture0 = useTexture('/flat-store.jpg');
   // Secondary textures load in the background without blocking initial mount
   const textures = useTexture(['/flat-store.jpg', '/flat-store1.jpg', '/flat-store2.jpg']);
-  
+
   const [activeTextureIndex, setActiveTextureIndex] = useState(0);
   const [nextTextureIndex, setNextTextureIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
+
   const shaderMatRef = useRef<THREE.ShaderMaterial | null>(null);
   const transitionStartTime = useRef<number>(0);
   const TRANSITION_DURATION = 800; // ms
@@ -127,8 +127,8 @@ function PhoneModel({
             let minV = Infinity, maxV = -Infinity;
             for (let i = 0; i < uvAttr.count; i++) {
               const u = uvAttr.getX(i), v = uvAttr.getY(i);
-              if (u < minU)minU = u; if (u > maxU)maxU = u;
-              if (v < minV)minV = v; if (v > maxV)maxV = v;
+              if (u < minU) minU = u; if (u > maxU) maxU = u;
+              if (v < minV) minV = v; if (v > maxV) maxV = v;
             }
             const uR = maxU - minU || 1;
             const vR = maxV - minV || 1;
@@ -153,13 +153,13 @@ function PhoneModel({
         transitionStartTime.current = performance.now();
         setNextTextureIndex((activeTextureIndex + 1) % 3);
       }
-    }, 3000); 
+    }, 3000);
     return () => clearInterval(interval);
   }, [activeTextureIndex, isTransitioning]);
 
   useFrame(() => {
     if (!groupRef.current) return;
-    
+
     // 1. Smooth rotation tracking
     groupRef.current.rotation.y += (rotY.get() - groupRef.current.rotation.y) * 0.08;
     groupRef.current.rotation.x += (rotX.get() - groupRef.current.rotation.x) * 0.08;
@@ -169,7 +169,7 @@ function PhoneModel({
     if (isTransitioning && shaderMatRef.current) {
       const now = performance.now();
       const progress = Math.min((now - transitionStartTime.current) / TRANSITION_DURATION, 1.0);
-      
+
       shaderMatRef.current.uniforms.uTex1.value = textures[activeTextureIndex];
       shaderMatRef.current.uniforms.uTex2.value = textures[nextTextureIndex];
       shaderMatRef.current.uniforms.uProgress.value = progress;
@@ -205,7 +205,7 @@ useTexture.preload('/flat-store2.jpg');
 
 export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
@@ -223,36 +223,36 @@ export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
     <Canvas
       style={{ width: '100%', height: '100%', background: 'transparent' }}
       camera={{ position: [0, 0, 4.5], fov: 38 }}
-      // ⚡ SPEED: Capping DPR at 1.0 for mobile and 1.5 for desktop to save massive GPU cycles
-      dpr={isMobile ? 1 : 1.5} 
-      gl={{ 
+      // ⚡ SPEED: Capping DPR at 1.0 for mobile and 1.5 for desktop
+      dpr={isMobile ? 1 : [1, 1.5]}
+      gl={{
         antialias: !isMobile, // ⚡ Disable antialiasing on mobile for massive FPS boost
         alpha: true,
-        powerPreference: "high-performance" 
+        powerPreference: "high-performance"
       }}
       onCreated={({ gl }) => {
         gl.outputColorSpace = THREE.SRGBColorSpace;
-        gl.toneMapping = THREE.NoToneMapping; 
+        gl.toneMapping = THREE.NoToneMapping;
       }}
     >
       <Suspense fallback={null}>
         <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} makeDefault />
-        
+
         <ambientLight intensity={0.4} />
         <directionalLight position={[4, 8, 5]} intensity={1.6} />
         <directionalLight position={[-4, 2, -4]} intensity={0.5} color="#8899ff" />
         <pointLight position={[0, -3, 3]} intensity={0.8} />
 
         {/* ⚡ SPEED: Lower resolution shadows on mobile */}
-        <ContactShadows 
-          position={[0, -2.1, 0]} 
-          opacity={0.5} 
-          scale={6} 
-          blur={2.5} 
-          far={4} 
-          resolution={isMobile ? 256 : 512} 
+        <ContactShadows
+          position={[0, -2.1, 0]}
+          opacity={0.5}
+          scale={6}
+          blur={2.5}
+          far={4}
+          resolution={isMobile ? 256 : 512}
         />
-        
+
         <Float speed={isMobile ? 1.5 : 2} rotationIntensity={0.2} floatIntensity={0.5}>
           <PhoneModel rotY={rotY} rotX={rotX} rotZ={rotZ} onLoad={onLoad} isMobile={isMobile} />
         </Float>

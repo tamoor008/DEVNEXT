@@ -47,15 +47,7 @@ const services = [
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const [modelLoaded, setModelLoaded] = useState(false);
-  const [showModel, setShowModel] = useState(false);
   const [trackDrag, setTrackDrag] = useState(0);
-
-  // ⚡ SPEED: Defer 3D initialization to let the rest of the page finish painting first
-  useEffect(() => {
-    const timer = setTimeout(() => setShowModel(true), 800);
-    return () => clearTimeout(timer);
-  }, []);
-
 
   // Memoize the onLoad function to prevent the 3D component from resetting on every parent render.
   const handleModelLoad = useCallback(() => {
@@ -126,7 +118,7 @@ export default function Hero() {
 
             {/* Real WebGL iPhone 3D */}
             <div className={`relative w-full h-full pointer-events-auto transition-all duration-1000 ease-out ${modelLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-95 blur-md'}`}>
-              {showModel && <IPhone3D scrollProgress={scrollYProgress} onLoad={handleModelLoad} />}
+              <IPhone3D scrollProgress={scrollYProgress} onLoad={handleModelLoad} />
             </div>
           </motion.div>
         </div>
