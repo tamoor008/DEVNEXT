@@ -1,11 +1,10 @@
 'use client';
 
 import { Suspense, useRef, useEffect, useMemo, useState } from 'react';
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
-import { useGLTF, Environment, ContactShadows, Center, OrbitControls, Float } from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useGLTF, ContactShadows, Center, OrbitControls, Float, useTexture } from '@react-three/drei';
 import { MotionValue, useTransform } from 'framer-motion';
 import * as THREE from 'three';
-import { TextureLoader } from 'three';
 
 // Shaders for the sliding transition
 const vertexShader = `
@@ -47,11 +46,13 @@ function PhoneModel({
   rotX,
   rotZ,
   onLoad,
+  isMobile,
 }: {
   rotY: MotionValue<number>;
   rotX: MotionValue<number>;
   rotZ: MotionValue<number>;
   onLoad?: () => void;
+  isMobile: boolean;
 }) {
   const groupRef = useRef<THREE.Group>(null!);
   // ⚡ SPEED: Using the 800KB Draco-compressed model with a high-performance CDN decoder
@@ -70,8 +71,11 @@ function PhoneModel({
     return clone;
   }, [originalScene]);
 
-  // Load textures: 0: flat-store, 1: flat-store1, 2: flat-store2
-  const textures = useLoader(TextureLoader, ['/flat-store.jpg', '/flat-store1.jpg', '/flat-store2.jpg']);
+  // ⚡ SPEED: Load only the FIRST texture immediately for instant render
+  const texture0 = useTexture('/flat-store.jpg');
+  // Secondary textures load in the background without blocking initial mount
+  const textures = useTexture(['/flat-store.jpg', '/flat-store1.jpg', '/flat-store2.jpg']);
+  
   const [activeTextureIndex, setActiveTextureIndex] = useState(0);
   const [nextTextureIndex, setNextTextureIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -82,24 +86,22 @@ function PhoneModel({
 
   // Configure textures once for high-fidelity rendering and sliding wrapping
   useEffect(() => {
-    if (!textures.length || !gl) return;
+    if (!textures || textures.length === 0 || !gl) return;
     textures.forEach((texture) => {
       texture.flipY = true;
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.generateMipmaps = true;
       texture.minFilter = THREE.LinearMipmapLinearFilter;
       texture.magFilter = THREE.LinearFilter;
-      texture.anisotropy = Math.min(gl.capabilities.getMaxAnisotropy(), 4);
+      texture.anisotropy = isMobile ? 1 : Math.min(gl.capabilities.getMaxAnisotropy(), 4);
       texture.wrapS = THREE.RepeatWrapping; // Essential for the sliding UV math
       texture.wrapT = THREE.ClampToEdgeWrapping;
-      texture.repeat.set(1, 1);
-      texture.offset.set(0, 0);
     });
-  }, [textures, gl]);
+  }, [textures, gl, isMobile]);
 
   // Initial Material Setup and UV Normalization
   useEffect(() => {
-    if (!textures.length || !scene) return;
+    if (!textures || textures.length === 0 || !scene) return;
 
     const shaderMat = new THREE.ShaderMaterial({
       uniforms: {
@@ -199,6 +201,17 @@ interface IPhone3DProps {
 useGLTF.preload('/iphone14-compressed.glb', 'https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
 
 export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const rotY = useTransform(scrollProgress, [0, 0.85], [Math.PI * 2, Math.PI / 5]);
   const rotX = useTransform(scrollProgress, [0, 0.85], [0.24, 0.4]);
   const rotZ = useTransform(scrollProgress, [0, 0.85], [-0.17, -0.15]);
@@ -207,30 +220,38 @@ export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
     <Canvas
       style={{ width: '100%', height: '100%', background: 'transparent' }}
       camera={{ position: [0, 0, 4.5], fov: 38 }}
-      // ⚡ SPEED: Capping DPR at 1.5 cuts GPU workload by 50% on Retina while staying sharp
-      dpr={[1, 1.5]} 
+      // ⚡ SPEED: Capping DPR at 1.0 for mobile and 1.5 for desktop
+      dpr={isMobile ? 1 : [1, 1.5]} 
       gl={{ 
-        antialias: true, 
+        antialias: !isMobile, // ⚡ Disable antialiasing on mobile for massive FPS boost
         alpha: true,
-        powerPreference: "high-performance" // ⚡ Demand the best from the local GPU
+        powerPreference: "high-performance" 
       }}
       onCreated={({ gl }) => {
         gl.outputColorSpace = THREE.SRGBColorSpace;
         gl.toneMapping = THREE.NoToneMapping; 
       }}
     >
-      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} makeDefault />
-      
-      {/* ⚡ SPEED: Using lightweight light rig instead of heavy HDR Environment downloads */}
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[4, 8, 5]} intensity={1.6} />
-      <directionalLight position={[-4, 2, -4]} intensity={0.5} color="#8899ff" />
-      <pointLight position={[0, -3, 3]} intensity={0.8} />
-
-      <ContactShadows position={[0, -2.1, 0]} opacity={0.5} scale={6} blur={2.5} far={4} />
       <Suspense fallback={null}>
-        <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-          <PhoneModel rotY={rotY} rotX={rotX} rotZ={rotZ} onLoad={onLoad} />
+        <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} makeDefault />
+        
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[4, 8, 5]} intensity={1.6} />
+        <directionalLight position={[-4, 2, -4]} intensity={0.5} color="#8899ff" />
+        <pointLight position={[0, -3, 3]} intensity={0.8} />
+
+        {/* ⚡ SPEED: Lower resolution shadows on mobile */}
+        <ContactShadows 
+          position={[0, -2.1, 0]} 
+          opacity={0.5} 
+          scale={6} 
+          blur={2.5} 
+          far={4} 
+          resolution={isMobile ? 256 : 512} 
+        />
+        
+        <Float speed={isMobile ? 1.5 : 2} rotationIntensity={0.2} floatIntensity={0.5}>
+          <PhoneModel rotY={rotY} rotX={rotX} rotZ={rotZ} onLoad={onLoad} isMobile={isMobile} />
         </Float>
       </Suspense>
     </Canvas>

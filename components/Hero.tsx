@@ -106,30 +106,15 @@ export default function Hero() {
             }}
             className="w-[600px] h-[800px] relative pointer-events-none flex items-center justify-center -mr-[50px] lg:-mr-0"
           >
-            {/* Instant Ghost Image (Placeholder) — Appears in <0.2s */}
-            {!modelLoaded && (
-              <div className="absolute inset-0 z-[65] flex items-center justify-center transition-opacity duration-1000">
-                <div className="relative w-[340px] h-[700px] rounded-[45px] overflow-hidden border-[8px] border-[#1a1a1a] shadow-2xl bg-black">
-                  <Image 
-                    src="/flat-store.jpg" 
-                    alt="Phone Placeholder" 
-                    fill 
-                    priority 
-                    className="object-cover opacity-60 blur-sm"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
-                </div>
-              </div>
-            )}
-
-            {/* Localized 3D Loader Loader — Subtle over the ghost image */}
+            {/* Localized 3D Loader Loader — Subtle over the background */}
             {!modelLoaded && (
               <div className="absolute inset-0 flex flex-col items-center justify-center z-[70] transition-opacity duration-500">
-                <div className="relative w-12 h-12 animate-spin opacity-30">
+                <div className="relative w-12 h-12 animate-spin opacity-40">
                   <Image src="/footer1.png" alt="Model Loader" fill className="object-contain grayscale" />
                 </div>
               </div>
             )}
+
 
             {/* Real WebGL iPhone 3D */}
             <div className={`relative w-full h-full pointer-events-auto transition-all duration-1000 ease-out ${modelLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-95 blur-md'}`}>
