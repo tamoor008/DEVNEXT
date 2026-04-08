@@ -199,6 +199,9 @@ interface IPhone3DProps {
 
 // ⚡ PRELOAD: Force the browser to start downloading these heavy assets as soon as the script parses
 useGLTF.preload('/iphone14-compressed.glb', 'https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+useTexture.preload('/flat-store.jpg');
+useTexture.preload('/flat-store1.jpg');
+useTexture.preload('/flat-store2.jpg');
 
 export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
   const [isMobile, setIsMobile] = useState(false);

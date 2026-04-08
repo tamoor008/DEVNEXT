@@ -110,7 +110,7 @@ export default function Hero() {
             {!modelLoaded && (
               <div className="absolute inset-0 flex flex-col items-center justify-center z-[70] transition-opacity duration-500">
                 <div className="relative w-12 h-12 animate-spin opacity-40">
-                  <Image src="/footer1.png" alt="Model Loader" fill className="object-contain grayscale" />
+                  <Image src="/footer1.png" alt="Model Loader" fill className="object-contain grayscale" priority />
                 </div>
               </div>
             )}

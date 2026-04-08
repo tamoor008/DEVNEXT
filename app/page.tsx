@@ -1,17 +1,20 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
-import Companies from '@/components/Companies';
-import Stats from '@/components/Stats';
-import Showcase from '@/components/Showcase';
-import WhyChoose from '@/components/WhyChoose';
-import Reviews from '@/components/Reviews';
-import Team from '@/components/Team';
-import Blogs from '@/components/Blogs';
-import Quote from '@/components/Quote';
-import ContactForm from '@/components/ContactForm';
+
+// Lazy load sections below the fold to improve initial page load performance
+const Companies = dynamic(() => import('@/components/Companies'));
+const Stats = dynamic(() => import('@/components/Stats'));
+const Showcase = dynamic(() => import('@/components/Showcase'));
+const WhyChoose = dynamic(() => import('@/components/WhyChoose'));
+const Reviews = dynamic(() => import('@/components/Reviews'));
+const Team = dynamic(() => import('@/components/Team'));
+const Blogs = dynamic(() => import('@/components/Blogs'));
+const Quote = dynamic(() => import('@/components/Quote'));
+const ContactForm = dynamic(() => import('@/components/ContactForm'));
 
 export default function Home() {
   return (
