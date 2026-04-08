@@ -223,8 +223,8 @@ export default function IPhone3D({ scrollProgress, onLoad }: IPhone3DProps) {
     <Canvas
       style={{ width: '100%', height: '100%', background: 'transparent' }}
       camera={{ position: [0, 0, 4.5], fov: 38 }}
-      // ⚡ SPEED: Capping DPR at 1.0 for mobile and 1.5 for desktop
-      dpr={isMobile ? 1 : [1, 1.5]} 
+      // ⚡ SPEED: Capping DPR at 1.0 for mobile and 1.5 for desktop to save massive GPU cycles
+      dpr={isMobile ? 1 : 1.5} 
       gl={{ 
         antialias: !isMobile, // ⚡ Disable antialiasing on mobile for massive FPS boost
         alpha: true,

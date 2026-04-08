@@ -19,6 +19,8 @@ const nextConfig = {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
   },
+  compress: true, // ⚡ SPEED: Explicitly enable Gzip/Brotli compression for all assets
+
 };
 
 export default nextConfig;
