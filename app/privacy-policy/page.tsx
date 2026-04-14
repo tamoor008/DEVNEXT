@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">4. App Users & End Customers</h2>
               <p>
-                For our D2C and e-commerce clients, we develop mobile applications that end consumers use. TechniFuse acts as a data processor in these relationships, meaning we process shopper data strictly on behalf of the store owner. App users' privacy is governed primarily by the individual Privacy Policy of the brand whose app they are using.
+                For our D2C and e-commerce clients, we develop mobile applications that end consumers use. TechniFuse acts as a data processor in these relationships, meaning we process shopper data strictly on behalf of the store owner. App users&apos; privacy is governed primarily by the individual Privacy Policy of the brand whose app they are using.
               </p>
             </section>
 

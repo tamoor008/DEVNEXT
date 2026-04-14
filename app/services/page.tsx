@@ -468,7 +468,7 @@ function PricingSection() {
 
                 {/* Right Side: Features */}
                 <div className="p-8 md:p-12 bg-black/20">
-                  <h4 className="text-lg font-semibold text-white mb-6 uppercase tracking-wider text-sm">What's included:</h4>
+                  <h4 className="text-lg font-semibold text-white mb-6 uppercase tracking-wider text-sm">What&apos;s included:</h4>
                   <ul className="space-y-4">
                     {features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">

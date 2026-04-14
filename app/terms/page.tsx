@@ -20,14 +20,14 @@ export default function TermsAndConditions() {
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">1. Agreement to Terms</h2>
               <p>
-                These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and TechniFuse ("we," "us," or "our"), concerning your access to and use of our mobile app development services, our zero-upfront subscription ecosystem, and the technifuse.com website.
+                These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&quot;you&quot;) and TechniFuse (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), concerning your access to and use of our mobile app development services, our zero-upfront subscription ecosystem, and the technifuse.com website.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mb-4">2. Services & Subscription Model</h2>
               <p className="mb-4">
-                TechniFuse provides mobile application development and management services for e-commerce and D2C brands (particularly Shopify stores). Our services operate under a "Zero-Upfront Subscription Model", which includes:
+                TechniFuse provides mobile application development and management services for e-commerce and D2C brands (particularly Shopify stores). Our services operate under a &quot;Zero-Upfront Subscription Model&quot;, which includes:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Design, development, and deployment of native iOS & Android applications.</li>

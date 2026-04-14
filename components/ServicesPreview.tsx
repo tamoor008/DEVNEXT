@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Smartphone, Zap, Bell, Rocket, BarChart, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const services = [
   {
