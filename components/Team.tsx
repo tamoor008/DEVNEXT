@@ -15,22 +15,22 @@ const teamMembers = [
   {
     id: 2,
     name: 'Sarah Johnson',
-    role: 'Lead Developer',
-    designation: 'Full-Stack Development Lead',
+    role: 'Shopify Architect',
+    designation: 'E-commerce Solutions Lead',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600',
   },
   {
     id: 3,
     name: 'Michael Chen',
-    role: 'UI/UX Designer',
-    designation: 'Creative Design Director',
+    role: 'Lead App Designer',
+    designation: 'Mobile UX Design Director',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600',
   },
   {
     id: 4,
     name: 'Emily Rodriguez',
-    role: 'Project Manager',
-    designation: 'Senior Project Coordinator',
+    role: 'Growth Strategist',
+    designation: 'Client Success Manager',
     image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600',
   },
 ];
@@ -147,7 +147,7 @@ export default function Team() {
             <span className="gradient-text">the Magic</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            A collective of creative visionaries and strategic thinkers dedicated to elevating your brand
+            A collective of Shopify experts and React Native developers dedicated to scaling your e-commerce brand.
           </p>
         </motion.div>
       </div>

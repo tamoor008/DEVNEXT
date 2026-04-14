@@ -8,30 +8,30 @@ const showcases = [
   {
     id: 1,
     title: 'Velour Concept Store',
-    description: 'A seamless Shopify-to-App conversion with integrated AI styling assistant.',
+    description: 'High-conversion Shopify-to-App transition with real-time product sync.',
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800',
-    category: 'Shopify-to-App',
+    category: 'Shopify Sync',
   },
   {
     id: 2,
     title: 'Pulse Fitness Hub',
-    description: 'A standalone brand app featuring real-time push tracking and AI workout suggestions.',
+    description: 'Mobile-first Shopify store expansion with integrated one-tap checkout.',
     image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800',
-    category: 'Brand App',
+    category: 'One-Tap Checkout',
   },
   {
     id: 3,
     title: 'Glow Skincare',
-    description: 'D2C app with advanced retargeting and personalized skincare AI assistant.',
+    description: 'D2C Shopify app featuring advanced push notification retargeting.',
     image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800',
-    category: 'AI-Integrated',
+    category: 'Push Retargeting',
   },
   {
     id: 4,
     title: 'Zest Grocery',
-    description: 'High-recall retail app with instant stock alerts and smart cart integration.',
+    description: 'Retail Shopify app with automated back-in-stock alerts and growth analytics.',
     image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800',
-    category: 'Managed App',
+    category: 'Growth Analytics',
   },
 ];
 

@@ -115,8 +115,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Email</h3>
-                    <a href="mailto:hello@technifuse.com" className="text-gray-400 hover:text-accent-primary transition-colors">
-                      hello@technifuse.com
+                    <a href="mailto:technifuse2005@gmail.com" className="text-gray-400 hover:text-accent-primary transition-colors">
+                      technifuse2005@gmail.com
                     </a>
                   </div>
                 </motion.div>
@@ -130,8 +130,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Phone</h3>
-                    <a href="tel:+15551234567" className="text-gray-400 hover:text-accent-primary transition-colors">
-                      +1 (555) 123-4567
+                    <a href="tel:03104824942" className="text-gray-400 hover:text-accent-primary transition-colors">
+                      03104824942
                     </a>
                   </div>
                 </motion.div>
@@ -146,8 +146,8 @@ export default function Contact() {
                   <div>
                     <h3 className="text-white font-semibold mb-1">Address</h3>
                     <p className="text-gray-400">
-                      123 Tech Street<br />
-                      Digital City, DC 12345
+                      Gulberg III<br />
+                      Ghalib Market, Kickstart, Lahore
                     </p>
                   </div>
                 </motion.div>

@@ -17,6 +17,8 @@ const quickLinks = [
   { name: 'Services', href: '/services' },
   { name: 'Portfolio', href: '/portfolio' },
   { name: 'Contact', href: '/contact' },
+  { name: 'Privacy Policy', href: '/privacy-policy' },
+  { name: 'Terms & Conditions', href: '/terms' },
 ];
 
 // Spinning Logo Component
@@ -45,7 +47,7 @@ export default function Footer() {
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-accent-primary to-transparent" />
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent-primary/40 to-transparent blur-[2px]" />
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-accent-secondary/20 to-transparent blur-[4px]" />
-      
+
       {/* Top Section - Call to Action & Contact Info */}
       <div className="border-b border-gray-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -62,15 +64,15 @@ export default function Footer() {
                 <span className="text-2xl">👋</span>
                 <span className="text-gray-400">Contact us today!</span>
               </div>
-              
+
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
                 Have <span className="gradient-text">questions?</span> get in touch!
               </h2>
-              
+
               <p className="text-lg text-gray-400">
-                A digital agency who delivers revenue-generating digital marketing solutions.
+                The leading Shopify App Development agency specialized in high-conversion mobile storefronts and push notification logic.
               </p>
-              
+
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -101,31 +103,31 @@ export default function Footer() {
                 <div className="flex items-start space-x-4">
                   <MapPin className="w-5 h-5 text-accent-primary mt-1 flex-shrink-0" />
                   <div className="text-gray-400 space-y-1">
-                    <p>Asia Pacific</p>
-                    <p>United Kingdom</p>
-                    <p>United Arab Emirates</p>
+                    <p>Gulberg III</p>
+                    <p>Ghalib Market, Kickstart</p>
+                    <p>Lahore, Pakistan</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
                   <Phone className="w-5 h-5 text-accent-primary mt-1 flex-shrink-0" />
                   <div className="text-gray-400">
-                    <p>+1 (555) 123-4567</p>
+                    <p>03104824942</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
                   <Clock className="w-5 h-5 text-accent-primary mt-1 flex-shrink-0" />
                   <div className="text-gray-400 space-y-1">
-                    <p>Mon-Fri: 10 am - 6 pm</p>
-                    <p>Sat-Sunday: Closed</p>
+                    <p>24/7</p>
+                    <p>Sunday Closed</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
                   <Mail className="w-5 h-5 text-accent-primary mt-1 flex-shrink-0" />
                   <div className="text-gray-400">
-                    <p>hello@technifuse.com</p>
+                    <p>technifuse2005@gmail.com</p>
                   </div>
                 </div>
               </div>

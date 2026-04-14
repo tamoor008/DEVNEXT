@@ -2,9 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import Link from 'next/link';
+
 import Image from 'next/image';
-import { ChevronDown, Smartphone, Globe, Bot, Zap, Database, Cloud, Shield } from 'lucide-react';
+import Link from 'next/link';
+import { ChevronDown, Smartphone, Zap, Bell, Rocket, BarChart, Shield, CheckCircle } from 'lucide-react';
 
 type Service = {
   id: string;
@@ -21,109 +22,109 @@ type Service = {
 
 const services: Service[] = [
   {
-    id: 'web-to-app',
-    title: 'Web-to-App Conversion',
+    id: 'app-development',
+    title: 'App Development',
     icon: Smartphone,
-    description: 'Transform your existing Shopify or web store into a native mobile app.',
+    description: 'iOS + Android app with React Native & Shopify API integration.',
     color: 'from-blue-500 to-cyan-500',
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800',
     details: {
       features: [
-        'Seamless Shopify & WooCommerce Sync',
-        'Native iOS & Android Experience',
-        'Real-time Catalog Updates',
-        'Fast & Secure Checkout Integration',
+        'React Native (iOS + Android)',
+        'Shopify API Integration',
+        'Real-time Product Sync',
+        'Native Cart & Checkout',
         'Custom Branded UI/UX',
-        'Improved Conversion Rates',
+        'Performance Optimized',
       ],
-      technologies: ['React Native', 'Shopify API', 'Node.js', 'REST/GraphQL', 'Firebase'],
+      technologies: ['React Native', 'Shopify API', 'Node.js', 'GraphQL', 'Firebase'],
     },
   },
   {
-    id: 'standalone-apps',
-    title: 'Standalone Brand Apps',
-    icon: Globe,
-    description: 'Custom mobile apps for brands looking for a dedicated digital presence.',
+    id: 'conversion-optimization',
+    title: 'Conversion Optimization',
+    icon: Zap,
+    description: 'Fast UI/UX designed for mobile-first shoppers to maximize sales.',
     color: 'from-purple-500 to-pink-500',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
     details: {
       features: [
-        'Unique App-First Architecture',
-        'Custom Workflow Automation',
-        'In-App Community Features',
-        'Direct-to-Consumer Engagement',
-        'Offline Functionality',
-        'Personalized User Profiles',
+        'Ultra-Fast Loading Times',
+        'Mobile-First Design',
+        'One-Tap Checkout Experience',
+        'Intuitive Navigation',
+        'Reduced Friction Points',
+        'Higher Add-to-Cart Rates',
       ],
-      technologies: ['Flutter', 'React Native', 'Next.js', 'PostgreSQL', 'Cloud Run'],
+      technologies: ['Figma', 'UX Research', 'A/B Testing', 'Core Web Vitals'],
     },
   },
   {
-    id: 'ai-integration',
-    title: 'AI Assistant Integration',
-    description: 'Intelligent assistants that resolve queries and suggest products.',
-    icon: Bot,
+    id: 'push-notifications',
+    title: 'Push Notifications (💰 Profit)',
+    icon: Bell,
+    description: 'Your #1 revenue driver with abandoned cart and sales alerts.',
     color: 'from-pink-500 to-rose-500',
     image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?w=800',
     details: {
       features: [
-        '24/7 Automated Query Resolution',
-        'Personalized Product Recommendations',
-        'Natural Language Processing',
-        'Customer Intent Recognition',
-        'Automated Support Ticketing',
-        'Voice Search Capability',
+        'Abandoned Cart Reminders',
+        'Personalized Sales Campaigns',
+        'Back-in-Stock Alerts',
+        'Limited Time Offers',
+        'Direct-to-Customer Engagement',
+        'High Open & Click Rates',
       ],
-      technologies: ['OpenAI API', 'Vector Databases', 'Python', 'LangChain', 'FastAPI'],
+      technologies: ['OneSignal', 'Firebase Cloud Messaging', 'Deep Linking'],
     },
   },
   {
-    id: 'retargeting',
-    title: 'Smart Retargeting & Push',
-    description: 'Boost engagement with automated notifications and reminders.',
-    icon: Zap,
+    id: 'app-store-launch',
+    title: 'App Store Launch',
+    icon: Rocket,
+    description: 'Full publishing management for Apple App Store & Google Play Store.',
     color: 'from-indigo-500 to-purple-500',
     image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800',
     details: {
       features: [
-        'Instant Push Notifications',
-        'Automated Cart Recovery',
-        'Personalized Win-back Campaigns',
-        'Daily Engagement Triggers',
-        'Rich Media Notifications',
-        'Deep Linking to Products',
+        'App Store submission',
+        'Google Play deployment',
+        'App Store Optimization (ASO)',
+        'Guidelines Compliance',
+        'Release Management',
+        'Post-Launch Monitoring',
       ],
-      technologies: ['OneSignal', 'Firebase Cloud Messaging', 'Analytics', 'Edge Functions'],
+      technologies: ['App Store Connect', 'Google Play Console', 'Fastlane', 'ASO Tools'],
     },
   },
   {
-    id: 'managed-ecosystem',
-    title: 'Managed App Ecosystem',
-    icon: Shield,
-    description: 'Zero technical headache—we handle servers and deployments.',
-    color: 'from-red-500 to-orange-500',
-    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800',
+    id: 'analytics-growth',
+    title: 'Analytics & Growth',
+    icon: BarChart,
+    description: 'Data-driven insights to track retention and customer behavior.',
+    color: 'from-green-500 to-emerald-500',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
     details: {
       features: [
-        'Play Store & App Store Management',
-        'Managed Server Infrastructure',
-        'Automated Security Updates',
-        'Zero Deployment Errors',
-        'Regular Performance Audits',
-        'Dedicated Support Team',
+        'Track Installs & Retention',
+        'Customer Behavior Mapping',
+        'Improve Repeat Purchases',
+        'Revenue Attribution',
+        'User Journey Analysis',
+        'Data-Driven Design Updates',
       ],
-      technologies: ['Docker', 'Kubernetes', 'CI/CD Pipelines', 'AWS/GCP', 'Terraform'],
+      technologies: ['Mixpanel', 'Amplitude', 'Google Analytics', 'Shopify Analytics'],
     },
   },
 ];
 
 // Separate component for services list with proper animation triggers
-function ServicesList({ 
-  services, 
-  openService, 
+function ServicesList({
+  services,
+  openService,
   toggleService,
   listVariants,
-  cardVariants 
+  cardVariants
 }: {
   services: Service[];
   openService: string | null;
@@ -157,12 +158,12 @@ function ServicesList({
 }
 
 // Individual service card component
-function ServiceCard({ 
-  service, 
-  index, 
-  isOpen, 
+function ServiceCard({
+  service,
+  index,
+  isOpen,
   onToggle,
-  variants 
+  variants
 }: {
   service: Service;
   index: number;
@@ -188,7 +189,9 @@ function ServiceCard({
             <h3 className="text-xl font-bold text-white group-hover:text-accent-primary transition-colors duration-300">
               {service.title}
             </h3>
-            <p className="text-gray-400 text-sm">{service.description}</p>
+            <p className={`text-sm tracking-wide ${index === 1 ? 'text-gray-200 font-bold' : 'text-gray-300 font-medium'}`}>
+              {service.description}
+            </p>
           </div>
         </div>
         {/* Chevron - Only visible on mobile */}
@@ -215,7 +218,7 @@ function ServiceCard({
               />
               <div className={`absolute inset-0 bg-gradient-to-r ${service.color} opacity-20`} />
             </div>
-            
+
             {/* Content Bottom */}
             <div className="space-y-6">
               <div>
@@ -224,7 +227,7 @@ function ServiceCard({
                   {service.details.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start space-x-2">
                       <span className="text-accent-primary mt-1">•</span>
-                      <span className="text-gray-400 text-sm">{feature}</span>
+                      <span className="text-white text-sm font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -242,17 +245,7 @@ function ServiceCard({
                   ))}
                 </div>
               </div>
-              <div>
-                <Link href={`/services/${service.id}`}>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-6 py-3 rounded-full bg-gradient-to-r ${service.color} text-white font-semibold`}
-                  >
-                    Learn More
-                  </motion.button>
-                </Link>
-              </div>
+
             </div>
           </div>
         </div>
@@ -280,7 +273,7 @@ function ServiceCard({
                   />
                   <div className={`absolute inset-0 bg-gradient-to-r ${service.color} opacity-20`} />
                 </div>
-                
+
                 {/* Content Bottom */}
                 <div className="space-y-6">
                   <div>
@@ -289,7 +282,7 @@ function ServiceCard({
                       {service.details.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start space-x-2">
                           <span className="text-accent-primary mt-1">•</span>
-                          <span className="text-gray-400 text-sm">{feature}</span>
+                          <span className="text-white text-sm font-medium">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -307,17 +300,7 @@ function ServiceCard({
                       ))}
                     </div>
                   </div>
-                  <div>
-                    <Link href={`/services/${service.id}`}>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`px-6 py-3 rounded-full bg-gradient-to-r ${service.color} text-white font-semibold`}
-                      >
-                        Learn More
-                      </motion.button>
-                    </Link>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -342,24 +325,24 @@ export default function Services() {
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 80, 
-      scale: 0.8, 
+    hidden: {
+      opacity: 0,
+      y: 80,
+      scale: 0.8,
       rotate: -5
     },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1, 
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
       rotate: 0,
-      transition: { 
-        duration: 0.8, 
+      transition: {
+        duration: 0.8,
         ease: [0.22, 0.61, 0.36, 1],
         type: 'spring',
         stiffness: 80,
         damping: 15
-      } 
+      }
     },
   };
 
@@ -369,7 +352,7 @@ export default function Services() {
 
   return (
     <main className="min-h-screen">
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-dark-100 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_70%)]" />
@@ -381,11 +364,11 @@ export default function Services() {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-balance">
-              <span className="text-white">Our App</span>{' '}
-              <span className="gradient-text">Ecosystem</span>
+              <span className="text-white">Shopify App</span>{' '}
+              <span className="gradient-text">Development</span>
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed">
-              Powerful mobile solutions with integrated AI, advanced retargeting, and zero technical management.
+              Scale your store into a mobile powerhouse. High-performance apps with Shopify sync, push notifications, and analytics.
             </p>
           </motion.div>
         </div>
@@ -394,9 +377,9 @@ export default function Services() {
       {/* Services List */}
       <section className="py-24 bg-dark-200 relative overflow-hidden">
         <div className="container mx-auto px-2 sm:px-4 lg:px-6">
-          <ServicesList 
-            services={services} 
-            openService={openService} 
+          <ServicesList
+            services={services}
+            openService={openService}
             toggleService={toggleService}
             listVariants={listVariants}
             cardVariants={cardVariants}
@@ -404,8 +387,128 @@ export default function Services() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <PricingSection />
 
     </main>
+  );
+}
+
+function PricingSection() {
+  const features = [
+    'Complete App with no initial cost',
+    'App Updates & Bug Fixes',
+    'Custom Feature Development',
+    '24/7 Technical Support',
+    'Monthly Performance & Growth Audit',
+    'Push Notification Strategy & Management',
+    'Managed Shopify Integration & Sync',
+  ];
+
+  return (
+    <section className="py-24 bg-dark-100 relative overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Scale with <span className="gradient-text">Subscription</span>
+          </h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Get your own dedicated development team for a flat monthly fee. No surprises, just growth.
+          </p>
+        </motion.div>
+
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+            transition={{ duration: 0.5 }}
+            className="relative group mb-12"
+          >
+            {/* Glow Effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent-primary via-accent-secondary to-accent-tertiary rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
+            
+            <div className="relative bg-dark-200 border border-gray-800 rounded-3xl overflow-hidden glass">
+              <div className="grid md:grid-cols-2">
+                {/* Left Side: Info */}
+                <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-800">
+                  <div className="mb-8">
+                    <span className="px-4 py-1.5 rounded-full bg-accent-primary/10 border border-accent-primary/20 text-accent-primary text-sm font-medium mb-4 inline-block">
+                      Risk-Free Launch
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Your App Store <span className="gradient-text">Empire</span></h3>
+                    <p className="text-gray-400">A completely done-for-you mobile app with zero heavy upfront development fees.</p>
+                  </div>
+
+                  <div className="mb-8">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-5xl font-bold text-white">30,000</span>
+                      <span className="text-gray-400">/mo</span>
+                    </div>
+                    <p className="text-gray-500 text-sm mt-2">Billed monthly. Cancel anytime.</p>
+                  </div>
+
+                  <Link 
+                    href="https://wa.me/923104824942" 
+                    target="_blank"
+                    className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-accent-primary to-accent-secondary text-white font-bold text-lg hover:shadow-lg hover:shadow-accent-primary/25 transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                  >
+                    <span>Get Started Now</span>
+                    <Rocket className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+
+                {/* Right Side: Features */}
+                <div className="p-8 md:p-12 bg-black/20">
+                  <h4 className="text-lg font-semibold text-white mb-6 uppercase tracking-wider text-sm">What's included:</h4>
+                  <ul className="space-y-4">
+                    {features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-accent-primary/10 flex items-center justify-center">
+                          <CheckCircle className="w-3 h-3 text-accent-primary" />
+                        </div>
+                        <span className="text-white text-lg font-medium">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <div className="mt-10 pt-8 border-t border-gray-800/50">
+                    <p className="text-gray-400 text-sm flex items-center gap-2">
+                      <Shield className="w-4 h-4 text-accent-secondary" />
+                      100% Satisfaction Guarantee
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="text-center"
+          >
+            <p className="text-white font-semibold flex items-center justify-center gap-4 text-sm opacity-80 hover:opacity-100 transition-opacity">
+              <span>Trusted by 50+ Shopify Brands</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-primary/50" />
+              <span>Built for Scale</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-primary/50" />
+              <span>Expert Support</span>
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }
 

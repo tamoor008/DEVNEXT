@@ -6,27 +6,27 @@ import { ShieldCheck, Sparkles, Gauge, Users } from 'lucide-react';
 const pillars = [
   {
     icon: Sparkles,
-    title: 'Zero Initial Cost',
+    title: 'Zero Upfront Cost',
     description: 'Launch your premium mobile app with a simple subscription model. No heavy upfront development fees.',
-    points: ['Subscription-based model', 'No hidden setup costs', 'Scalable as you grow'],
+    points: ['Revenue-sharing options', 'No hidden setup costs', 'Scalable as you grow'],
   },
   {
     icon: Gauge,
-    title: 'No Technical Headache',
-    description: 'We handle everything from server management to Play Store and App Store deployments and updates.',
-    points: ['Store deployment managed', 'Automated server scaling', 'Zero deployment errors'],
+    title: 'No Tech Headache',
+    description: 'We handle everything from Shopify API sync to Play Store and App Store deployments and updates.',
+    points: ['Shopify API management', 'Automated store sync', 'Zero deployment errors'],
   },
   {
     icon: ShieldCheck,
-    title: 'Higher Brand Recall',
+    title: 'Boost Brand Recall',
     description: 'Stay top-of-mind with an app icon on your customers home screen, triggering daily engagement.',
-    points: ['Permanent home screen presence', 'Faster access than web', 'Offline availability'],
+    points: ['Permanent home screen presence', 'One-tap checkout experience', 'Offline availability'],
   },
   {
     icon: Users,
-    title: 'Instant Retargeting',
-    description: 'Re-engage customers effortlessly with integrated push notifications and AI-driven suggestions.',
-    points: ['One-click push alerts', 'AI product suggestions', 'Seamless web-app sync'],
+    title: 'Push Profit Logic',
+    description: 'Re-engage customers effortlessly with integrated push notifications for abandoned carts and sales.',
+    points: ['90% open rates on push', 'Automated cart recovery', 'Seamless Shopify sync'],
   },
 ];
 

@@ -19,9 +19,9 @@ export default function Companies() {
           className="text-center mb-12"
         >
           <h3 className="text-2xl sm:text-3xl font-bold text-gray-300 mb-2">
-            Trusted by Industry Leaders
+            Trusted by Shopify Brands
           </h3>
-          <p className="text-gray-500">Companies we&apos;ve had the privilege to work with</p>
+          <p className="text-gray-500">Brands we&apos;ve helped scale with mobile storefronts</p>
         </motion.div>
 
         <div className="relative">

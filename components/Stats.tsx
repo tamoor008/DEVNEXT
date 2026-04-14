@@ -2,13 +2,13 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import { Users, Briefcase, Award, Code } from 'lucide-react';
+import { Bell, Briefcase, Award, Code } from 'lucide-react';
 
 const stats = [
-  { icon: Briefcase, value: 500, suffix: '+', label: 'Projects Completed', color: 'from-blue-500 to-cyan-500' },
-  { icon: Users, value: 200, suffix: '+', label: 'Happy Clients', color: 'from-purple-500 to-pink-500' },
-  { icon: Award, value: 50, suffix: '+', label: 'Awards Won', color: 'from-pink-500 to-rose-500' },
-  { icon: Code, value: 10000, suffix: '+', label: 'Lines of Code', color: 'from-indigo-500 to-purple-500' },
+  { icon: Briefcase, value: 150, suffix: '+', label: 'Shopify Apps Launched', color: 'from-blue-500 to-cyan-500' },
+  { icon: Bell, value: 50, suffix: 'M+', label: 'Push Notifications Sent', color: 'from-purple-500 to-pink-500' },
+  { icon: Award, value: 98, suffix: '%', label: 'Client Retention Rate', color: 'from-pink-500 to-rose-500' },
+  { icon: Code, value: 10, suffix: 'X', label: 'Conversion Lift', color: 'from-indigo-500 to-purple-500' },
 ];
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
