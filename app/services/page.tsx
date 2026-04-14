@@ -457,7 +457,7 @@ function PricingSection() {
                   </div>
 
                   <Link 
-                    href="https://wa.me/923104824942" 
+                    href="https://wa.me/923176856432" 
                     target="_blank"
                     className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-accent-primary to-accent-secondary text-white font-bold text-lg hover:shadow-lg hover:shadow-accent-primary/25 transition-all duration-300 flex items-center justify-center gap-2 group/btn"
                   >
