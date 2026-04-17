@@ -181,10 +181,14 @@ function ServiceCard({
         onClick={onToggle}
         className="w-full p-6 flex items-center justify-between hover:bg-dark-200 transition-colors md:cursor-default md:hover:bg-transparent"
       >
-        <div className="flex items-center space-x-4">
-          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center`}>
-            <service.icon className="w-6 h-6 text-white" />
-          </div>
+        <div className="flex items-center space-x-4 sm:space-x-5">
+          <motion.div 
+            whileTap={{ scale: 0.95 }}
+            className={`relative flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center shadow-lg shadow-black/20 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500`}
+          >
+            <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay" />
+            <service.icon className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-md relative z-10" />
+          </motion.div>
           <div className="text-left">
             <h3 className="text-xl font-bold text-white group-hover:text-accent-primary transition-colors duration-300">
               {service.title}

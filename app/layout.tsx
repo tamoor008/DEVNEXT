@@ -3,6 +3,8 @@ import "./globals.css";
 import FloatingButtons from "@/components/FloatingButtons";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
+
 
 export const metadata: Metadata = {
   title: "TechniFuse | Premium Mobile App Agency for Brands",
@@ -25,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <ScrollToTop />
         <Header />
+
         {children}
         <Footer />
         <FloatingButtons />
