@@ -9,46 +9,17 @@ export default function ContactForm() {
     name: '',
     email: '',
     phone: '',
-    company: '',
-    service: '',
-    budget: '',
-    timeline: '',
+    brand: '',
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Formspree form endpoint for Get In Touch form (home page)
-  // Using the same form ID - create a separate form in Formspree if you want different submissions
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maqykpzb';
+  // Custom API endpoint for email system
+  const API_ENDPOINT = '/api/contact';
 
-  const serviceOptions = [
-    'App Development',
-    'Website Design',
-    'UI/UX Design',
-    'Software Solutions',
-    'Database Solutions',
-    'Cloud Services',
-    'Cybersecurity',
-    'Other',
-  ];
 
-  const budgetOptions = [
-    '$5k - $10k',
-    '$10k - $25k',
-    '$25k - $50k',
-    '$50k - $100k',
-    '$100k+',
-  ];
-
-  const timelineOptions = [
-    'ASAP',
-    '1 - 2 months',
-    '3 - 4 months',
-    '5 - 6 months',
-    'Flexible / Not sure',
-  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,7 +27,7 @@ export default function ContactForm() {
     setError(null);
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const response = await fetch(API_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,10 +36,7 @@ export default function ContactForm() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          company: formData.company,
-          service: formData.service,
-          budget: formData.budget,
-          timeline: formData.timeline,
+          brand: formData.brand,
           message: formData.message,
           _subject: `New Contact Form Submission from ${formData.name}`,
         }),
@@ -80,10 +48,7 @@ export default function ContactForm() {
           name: '',
           email: '',
           phone: '',
-          company: '',
-          service: '',
-          budget: '',
-          timeline: '',
+          brand: '',
           message: '',
         });
         setTimeout(() => {
@@ -100,7 +65,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -209,76 +174,18 @@ export default function ContactForm() {
                 </motion.div>
 
                 <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.25 }}>
-                  <label className="block text-gray-300 mb-2 text-sm font-semibold">Company</label>
+                  <label className="block text-gray-300 mb-2 text-sm font-semibold">Brand</label>
                   <input
                     type="text"
-                    name="company"
-                    value={formData.company}
+                    name="brand"
+                    value={formData.brand}
                     onChange={handleChange}
                     placeholder="Your company or brand"
                     className="w-full px-5 py-4 rounded-xl bg-dark-200 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-accent-primary transition-all duration-200"
                   />
                 </motion.div>
 
-                <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.3 }}>
-                  <label className="block text-gray-300 mb-2 text-sm font-semibold">Service</label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-5 py-4 rounded-xl bg-dark-200 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-accent-primary transition-all duration-200"
-                  >
-                    <option value="" disabled>
-                      Select a service
-                    </option>
-                    {serviceOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </motion.div>
 
-                <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.35 }}>
-                  <label className="block text-gray-300 mb-2 text-sm font-semibold">Budget</label>
-                  <select
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-5 py-4 rounded-xl bg-dark-200 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-accent-primary transition-all duration-200"
-                  >
-                    <option value="" disabled>
-                      Select a range
-                    </option>
-                    {budgetOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </motion.div>
-
-                <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.4 }}>
-                  <label className="block text-gray-300 mb-2 text-sm font-semibold">Timeline</label>
-                  <select
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-5 py-4 rounded-xl bg-dark-200 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-accent-primary transition-all duration-200"
-                  >
-                    <option value="" disabled>
-                      When do you want to start?
-                    </option>
-                    {timelineOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </motion.div>
 
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}

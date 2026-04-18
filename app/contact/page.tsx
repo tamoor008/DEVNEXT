@@ -10,15 +10,15 @@ export default function Contact() {
     name: '',
     email: '',
     phone: '',
-    subject: '',
+    brand: '',
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Formspree form endpoint for Contact Us form
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maqykpzb';
+  // Custom API endpoint for email system
+  const API_ENDPOINT = '/api/contact';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ export default function Contact() {
     setError(null);
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const response = await fetch(API_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,15 +35,15 @@ export default function Contact() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          subject: formData.subject,
+          brand: formData.brand,
           message: formData.message,
-          _subject: `New Contact Form Submission: ${formData.subject}`,
+          _subject: `New Contact Form Submission: ${formData.brand}`,
         }),
       });
 
       if (response.ok) {
         setIsSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', brand: '', message: '' });
         setTimeout(() => {
           setIsSubmitted(false);
         }, 3000);
@@ -67,7 +67,7 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen">
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-dark-100 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_70%)]" />
@@ -240,10 +240,10 @@ export default function Contact() {
                 >
                   <input
                     type="text"
-                    name="subject"
-                    value={formData.subject}
+                    name="brand"
+                    value={formData.brand}
                     onChange={handleChange}
-                    placeholder="Subject"
+                    placeholder="Brand"
                     required
                     className="w-full px-6 py-4 rounded-xl bg-dark-100 border border-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-accent-primary transition-all duration-300"
                   />
