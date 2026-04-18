@@ -5,11 +5,12 @@ import { useRef, useEffect, useState } from 'react';
 import { Bell, Briefcase, Award, Code } from 'lucide-react';
 
 const stats = [
-  { icon: Briefcase, value: 150, suffix: '+', label: 'Shopify Apps Launched', color: 'from-blue-500 to-cyan-500' },
-  { icon: Bell, value: 50, suffix: 'M+', label: 'Push Notifications Sent', color: 'from-purple-500 to-pink-500' },
+  { icon: Briefcase, value: 5, suffix: '+', label: 'Shopify Apps Launched', color: 'from-blue-500 to-cyan-500' },
+  { icon: Bell, value: 10, suffix: 'k', label: 'Push Notifications Sent', color: 'from-purple-500 to-pink-500' },
   { icon: Award, value: 98, suffix: '%', label: 'Client Retention Rate', color: 'from-pink-500 to-rose-500' },
-  { icon: Code, value: 10, suffix: 'X', label: 'Conversion Lift', color: 'from-indigo-500 to-purple-500' },
+  { icon: Code, value: 5, suffix: 'X', label: 'Conversion Lift', color: 'from-indigo-500 to-purple-500' },
 ];
+
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
   const [count, setCount] = useState(0);

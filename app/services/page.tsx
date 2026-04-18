@@ -503,7 +503,7 @@ function PricingSection() {
             className="text-center"
           >
             <p className="text-white font-semibold flex items-center justify-center gap-4 text-sm opacity-80 hover:opacity-100 transition-opacity">
-              <span>Trusted by 50+ Shopify Brands</span>
+              <span>Trusted by 5+ Shopify Brands</span>
               <span className="w-1.5 h-1.5 rounded-full bg-accent-primary/50" />
               <span>Built for Scale</span>
               <span className="w-1.5 h-1.5 rounded-full bg-accent-primary/50" />

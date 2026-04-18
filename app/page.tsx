@@ -6,8 +6,8 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 
 // Lazy load sections below the fold to improve initial page load performance
-const Companies = dynamic(() => import('@/components/Companies'));
 const Stats = dynamic(() => import('@/components/Stats'));
+
 const Showcase = dynamic(() => import('@/components/Showcase'));
 const WhyChoose = dynamic(() => import('@/components/WhyChoose'));
 const Reviews = dynamic(() => import('@/components/Reviews'));
@@ -21,8 +21,8 @@ export default function Home() {
     <main className="min-h-screen relative bg-dark-50">
       <div className="relative z-10">
         <Hero />
-        <Companies />
         <Stats />
+
         <Showcase />
         <WhyChoose />
         <Reviews />
