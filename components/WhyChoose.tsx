@@ -34,24 +34,26 @@ export default function WhyChoose() {
   return (
     <section className="py-24 bg-dark-200 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 via-accent-secondary/5 to-accent-tertiary/5 opacity-40" />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            <span className="text-white">Why Choose</span>{' '}
-            <span className="gradient-text">TechniFuse</span>
-          </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Results-focused product teams combining strategy, design, engineering, and growth under one roof.
-          </p>
-        </motion.div>
+      <div className="relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              <span className="text-white">Why Choose</span>{' '}
+              <span className="gradient-text">TechniFuse</span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Results-focused product teams combining strategy, design, engineering, and growth under one roof.
+            </p>
+          </motion.div>
+        </div>
 
-        <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="px-4 sm:px-6 lg:px-8 grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-4">
           {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.title}

@@ -182,7 +182,7 @@ function ServiceCard({
         className="w-full p-6 flex items-center justify-between hover:bg-dark-200 transition-colors md:cursor-default md:hover:bg-transparent"
       >
         <div className="flex items-center space-x-4 sm:space-x-5">
-          <motion.div 
+          <motion.div
             whileTap={{ scale: 0.95 }}
             className={`relative flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center shadow-lg shadow-black/20 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500`}
           >
@@ -439,7 +439,7 @@ function PricingSection() {
           >
             {/* Glow Effect */}
             <div className="absolute -inset-1 bg-gradient-to-r from-accent-primary via-accent-secondary to-accent-tertiary rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-            
+
             <div className="relative bg-dark-200 border border-gray-800 rounded-3xl overflow-hidden glass">
               <div className="grid md:grid-cols-2">
                 {/* Left Side: Info */}
@@ -453,15 +453,16 @@ function PricingSection() {
                   </div>
 
                   <div className="mb-8">
-                    <div className="flex items-baseline gap-1">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl font-semibold text-gray-400">PKR</span>
                       <span className="text-5xl font-bold text-white">30,000</span>
                       <span className="text-gray-400">/mo</span>
                     </div>
                     <p className="text-gray-500 text-sm mt-2">Billed monthly. Cancel anytime.</p>
                   </div>
 
-                  <Link 
-                    href="https://wa.me/923176856432" 
+                  <Link
+                    href="https://wa.me/923176856432"
                     target="_blank"
                     className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-accent-primary to-accent-secondary text-white font-bold text-lg hover:shadow-lg hover:shadow-accent-primary/25 transition-all duration-300 flex items-center justify-center gap-2 group/btn"
                   >
@@ -483,7 +484,7 @@ function PricingSection() {
                       </li>
                     ))}
                   </ul>
-                  
+
                   <div className="mt-10 pt-8 border-t border-gray-800/50">
                     <p className="text-gray-400 text-sm flex items-center gap-2">
                       <Shield className="w-4 h-4 text-accent-secondary" />
@@ -494,7 +495,7 @@ function PricingSection() {
               </div>
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

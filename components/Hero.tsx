@@ -153,7 +153,7 @@ export default function Hero() {
                 <span className="text-sm text-gray-300 font-medium">Launch Your App with Zero Initial Cost</span>
               </motion.div>
               <h1 className="text-5xl sm:text-7xl font-extrabold mb-6 leading-tight text-white">
-                Convert Your <span className="gradient-text">Shopify Store</span><br />Into a Powerhouse <span className="gradient-text">Mobile App</span>
+                Turn Your <span className="gradient-text">Shopify Store</span><br />Into a Revenue-Driving <span className="gradient-text">Mobile App</span>
               </h1>
               <p className="text-xl text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0">High-performance React Native apps with real-time sync, one-tap checkout, and smart push notifications.</p>
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">

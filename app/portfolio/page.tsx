@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { ExternalLink, Github, Download } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 
 import ProjectCard, { Project } from '@/components/ProjectCard';
 
@@ -14,7 +14,6 @@ const projects: Project[] = [
     category: 'Web Development',
     description: 'A full-featured e-commerce platform with advanced shopping cart and payment integration',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800',
-    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Next.js', 'React', 'Stripe', 'MongoDB'],
     link: '#',
     github: '#',
@@ -26,7 +25,6 @@ const projects: Project[] = [
     category: 'App Development',
     description: 'A comprehensive fitness tracking app with workout plans and progress monitoring',
     image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800',
-    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['React Native', 'Firebase', 'Redux'],
     link: '#',
     github: '#',
@@ -38,7 +36,6 @@ const projects: Project[] = [
     category: 'UI/UX Design',
     description: 'Beautiful analytics dashboard for data visualization and business insights',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
-    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Figma', 'React', 'D3.js'],
     link: '#',
     github: '#',
@@ -50,7 +47,6 @@ const projects: Project[] = [
     category: 'Software Development',
     description: 'Secure banking application with real-time transactions and fraud detection',
     image: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800',
-    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Node.js', 'PostgreSQL', 'AWS'],
     link: '#',
     github: '#',
@@ -62,7 +58,6 @@ const projects: Project[] = [
     category: 'Web Development',
     description: 'Patient management system with appointment scheduling and medical records',
     image: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=800',
-    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Vue.js', 'Laravel', 'MySQL'],
     link: '#',
     github: '#',
@@ -74,7 +69,6 @@ const projects: Project[] = [
     category: 'App Development',
     description: 'Modern social networking app with real-time messaging and content sharing',
     image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800',
-    video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     technologies: ['Flutter', 'Firebase', 'GraphQL'],
     link: '#',
     github: '#',
