@@ -65,7 +65,7 @@ const services: Service[] = [
     icon: Bell,
     description: 'Your #1 revenue driver with abandoned cart and sales alerts.',
     color: 'from-pink-500 to-rose-500',
-    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd05a?w=800',
+    image: '/push-notifications.png',
     details: {
       features: [
         'Abandoned Cart Reminders',
