@@ -11,7 +11,6 @@ const Stats = dynamic(() => import('@/components/Stats'));
 const Showcase = dynamic(() => import('@/components/Showcase'));
 const WhyChoose = dynamic(() => import('@/components/WhyChoose'));
 const Reviews = dynamic(() => import('@/components/Reviews'));
-const Team = dynamic(() => import('@/components/Team'));
 const Blogs = dynamic(() => import('@/components/Blogs'));
 const Quote = dynamic(() => import('@/components/Quote'));
 const ContactForm = dynamic(() => import('@/components/ContactForm'));
@@ -26,7 +25,6 @@ export default function Home() {
         <Showcase />
         <WhyChoose />
         <Reviews />
-        <Team />
         <Blogs />
         <Quote />
         <ContactForm />

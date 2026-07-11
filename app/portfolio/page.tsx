@@ -120,8 +120,8 @@ export default function Portfolio() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${selectedCategory === category
-                    ? 'bg-gradient-primary text-white'
-                    : 'bg-dark-100 text-gray-400 border border-gray-800 hover:border-accent-primary'
+                  ? 'bg-gradient-primary text-white'
+                  : 'bg-dark-100 text-gray-400 border border-gray-800 hover:border-accent-primary'
                   }`}
               >
                 {category}

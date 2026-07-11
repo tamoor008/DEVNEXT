@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technifuse Proposal</title>
+    <link rel="icon" type="image/png" href="./public/favicon-32.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a2a3a;
+            background: #e5e7eb;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            padding: 40px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                height: 297mm;
+                overflow: hidden;
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+
+        /* Abstract Shapes */
+        .shape-tl {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: #b5d5e5;
+            transform: rotate(45deg);
+            z-index: 0;
+            border-radius: 40px;
+        }
+
+        .shape-tr {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: #b5d5e5;
+            transform: rotate(45deg);
+            z-index: 0;
+            border-radius: 60px;
+        }
+
+        .shape-bl {
+            position: absolute;
+            bottom: -150px;
+            left: -50px;
+            width: 250px;
+            height: 400px;
+            background: #b5d5e5;
+            transform: rotate(30deg);
+            z-index: 0;
+            border-radius: 40px;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Logo & Header */
+        .header {
+            text-align: center;
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+
+        .header img {
+            max-width: 280px;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            color: #1a2a3a;
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .sub-title {
+            color: #3b5266;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            height: 1px;
+            background: #b5d5e5;
+            width: 80%;
+            margin: 30px auto;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            width: 80%;
+            margin: 0 auto 50px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .contact-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .contact-text h4 {
+            font-size: 14px;
+            color: #1a2a3a;
+            margin-bottom: 3px;
+            font-weight: 700;
+        }
+
+        .contact-text p {
+            font-size: 13px;
+            color: #111827;
+            font-weight: 500;
+        }
+
+        /* Why Choose Us Block */
+        .why-choose-block {
+            display: flex;
+            background: #f1f5f9;
+            border-radius: 12px;
+            margin-top: auto;
+            margin-bottom: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .why-choose-title {
+            background: #b5d5e5;
+            padding: 30px;
+            width: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            color: #1a2a3a;
+            text-transform: uppercase;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+        }
+
+        .why-choose-text {
+            padding: 30px;
+            width: 70%;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #1a2a3a;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Lists */
+        .list-section {
+            margin-bottom: 20px;
+            padding: 0 40px;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .list-icon {
+            margin-top: 3px;
+            color: #b5d5e5;
+        }
+
+        .list-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .list-content h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a2a3a;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .list-content p {
+            font-size: 14px;
+            color: #111827;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* Page 2 & 3 Styling */
+        .page-header {
+            text-align: center;
+            margin: 30px 0 20px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1a2a3a;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #3b5266;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+            padding: 0 40px;
+        }
+
+        .service-item {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 8px;
+            height: 8px;
+            background: #e74c3c;
+            border-radius: 50%;
+        }
+
+        .service-item h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a2a3a;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .service-item p {
+            font-size: 13px;
+            color: #111827;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* Packages */
+        .package-card {
+            margin: 0 40px 20px;
+        }
+
+        .package-header {
+            background: #e1edf4;
+            border-radius: 40px;
+            padding: 15px 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            width: max-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .package-header h3 {
+            font-size: 20px;
+            color: #1a2a3a;
+            margin-bottom: 5px;
+        }
+
+        .package-header p {
+            font-size: 14px;
+            color: #111827;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1: Intro -->
+    <div class="page">
+        <div class="shape-tl"></div>
+        <div class="shape-tr"></div>
+        <div class="shape-bl"></div>
+
+        <div class="content-layer">
+            <div class="header">
+                <img src="./public/asset/techlogo.png" alt="Technifuse">
+                <h1 class="main-title">SHOPIFY APP DEVELOPMENT</h1>
+                <h2 class="sub-title">Turn Your Shopify Store Into a Revenue-Driving Mobile App</h2>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <h4>EMAIL</h4>
+                        <p>technifuse2005@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <h4>PHONE</h4>
+                        <p>+92 317 6856432</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <h4>INSTAGRAM</h4>
+                        <p>@technifuse</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <h4>WEBSITE</h4>
+                        <p>technifuse.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="why-choose-block">
+                <div class="why-choose-title">WHY<br>CHOOSE US?</div>
+                <div class="why-choose-text">
+                    At Technifuse, we don’t just build apps, we engineer high-converting digital mobile experiences that
+                    sync perfectly with your Shopify store to drive sales, brand equity, and long-term growth.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Tech Stack & Services -->
+    <div class="page">
+        <div class="shape-tr" style="width: 250px; height: 250px; top: -80px; right: -80px; border-radius: 40px;"></div>
+        <div class="shape-tl" style="width: 150px; height: 150px; top: -50px; left: -50px; border-radius: 20px;"></div>
+
+        <div class="content-layer" style="padding-top: 10px;">
+            <div class="page-header" style="margin-top: 0;">
+                <h2 class="page-title">OUR TECH STACK</h2>
+                <h3 class="page-subtitle">Modern, Fast, & Scalable</h3>
+            </div>
+
+            <div class="list-section" style="margin-top: 10px;">
+                <div class="list-item">
+                    <div class="list-icon"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg></div>
+                    <div class="list-content">
+                        <h4>FRONTEND & APP FRAMEWORK</h4>
+                        <p><strong>React Native (iOS & Android):</strong> True native performance with a single
+                            codebase. Smooth animations, rapid load times, and a premium feel.</p>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="list-icon"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg></div>
+                    <div class="list-content">
+                        <h4>BACKEND & APIS</h4>
+                        <p><strong>Node.js, GraphQL & Shopify API:</strong> Real-time data synchronization. Blazing fast
+                            queries ensuring your catalog and inventory are always perfectly matched.</p>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="list-icon"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg></div>
+                    <div class="list-content">
+                        <h4>ENGAGEMENT & NOTIFICATIONS</h4>
+                        <p><strong>OneSignal & Firebase:</strong> High-deliverability push notifications, deep linking
+                            directly to products, and automated abandoned cart recovery flows.</p>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="list-icon"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg></div>
+                    <div class="list-content">
+                        <h4>DESIGN & UX</h4>
+                        <p><strong>Figma & Core Web Vitals:</strong> Pixel-perfect UI designed specifically for mobile
+                            commerce. A/B tested layouts for maximum add-to-cart rates.</p>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="list-icon"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg></div>
+                    <div class="list-content">
+                        <h4>ANALYTICS & TRACKING</h4>
+                        <p><strong>Mixpanel, Amplitude & Google Analytics:</strong> Deep user journey mapping. We track
+                            every tap to understand behavior and continuously optimize the sales funnel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider" style="margin: 10px auto;"></div>
+
+            <div class="page-header" style="margin-top: 10px;">
+                <h2 class="page-title">CORE SERVICE</h2>
+                <h3 class="page-subtitle">OVERVIEW</h3>
+            </div>
+
+            <div class="services-grid" style="margin-top: 30px;">
+                <div class="service-item">
+                    <h4>APP DEVELOPMENT</h4>
+                    <p>iOS + Android app with React Native & Shopify API integration. Native cart & checkout.</p>
+                </div>
+                <div class="service-item">
+                    <h4>CONVERSION OPTIMIZATION</h4>
+                    <p>Fast UI/UX designed for mobile-first shoppers. Ultra-fast loading times and reduced friction
+                        points to maximize sales.</p>
+                </div>
+                <div class="service-item">
+                    <h4>PUSH NOTIFICATIONS</h4>
+                    <p>Your #1 revenue driver with abandoned cart and personalized sales alerts.</p>
+                </div>
+                <div class="service-item">
+                    <h4>AI CHATBOT RECOMMENDATIONS</h4>
+                    <p>Intelligent AI-powered chatbots that guide customers, answer questions, and recommend products to
+                        boost AOV.</p>
+                </div>
+                <div class="service-item">
+                    <h4>APP STORE LAUNCH</h4>
+                    <p>Full publishing management for Apple App Store & Google Play Store. Guidelines compliance & ASO.
+                    </p>
+                </div>
+                <div class="service-item">
+                    <h4>ANALYTICS & GROWTH</h4>
+                    <p>Data-driven insights to track retention, customer behavior mapping, and revenue attribution.</p>
+                </div>
+                <div class="service-item">
+                    <h4>REAL-TIME SYNC</h4>
+                    <p>Complete data synchronization with your Shopify store. Inventory, products, and customer profiles
+                        are always up-to-date.</p>
+                </div>
+                <div class="service-item">
+                    <h4>DEDICATED SUPPORT</h4>
+                    <p>24/7 technical oversight ensuring your app runs flawlessly during high-traffic drops and sales
+                        events.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Packages -->
+    <div class="page">
+        <div class="shape-tr" style="width: 200px; height: 200px; top: -50px; right: -50px; border-radius: 20px;"></div>
+
+        <div class="content-layer">
+            <div class="page-header" style="margin-top: 40px;">
+                <h2 class="page-title">SUBSCRIPTION PACKAGES</h2>
+            </div>
+
+            <div class="package-card">
+                <div class="package-header">
+                    <h3>App Development & Maintenance - Rs. 30,000/month</h3>
+                    <p>Designed for Scaling Shopify Brands</p>
+                </div>
+
+                <div class="list-section">
+                    <div class="list-item">
+                        <div class="list-icon"><svg viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></div>
+                        <div class="list-content">
+                            <h4>NO INITIAL COST</h4>
+                            <p>A completely done-for-you mobile app with zero heavy upfront development fees.</p>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-icon"><svg viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></div>
+                        <div class="list-content">
+                            <h4>APP UPDATES & BUG FIXES</h4>
+                            <p>Continuous monitoring, updates, and issue resolution to ensure peak performance.</p>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-icon"><svg viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></div>
+                        <div class="list-content">
+                            <h4>CUSTOM FEATURE DEVELOPMENT</h4>
+                            <p>Adding custom functionality and enhancements tailored to your growing brand needs.</p>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-icon"><svg viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></div>
+                        <div class="list-content">
+                            <h4>PUSH NOTIFICATION MANAGEMENT</h4>
+                            <p>Expert strategy and execution of push campaigns to drive immediate conversions.</p>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-icon"><svg viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></div>
+                        <div class="list-content">
+                            <h4>24/7 TECHNICAL SUPPORT</h4>
+                            <p>A single point of contact to manage execution, strategy, and day-to-day communication.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: Final Contact -->
+    <div class="page"
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+
+        <!-- Bottom Shapes resembling the reference -->
+        <div
+            style="position: absolute; bottom: -150px; left: -100px; width: 500px; height: 400px; background: #b5d5e5; transform: rotate(35deg); border-radius: 80px; z-index: 0;">
+        </div>
+        <div
+            style="position: absolute; bottom: -200px; right: -50px; width: 400px; height: 350px; background: #b5d5e5; transform: rotate(-40deg); border-radius: 60px; z-index: 0;">
+        </div>
+
+        <div style="position: relative; z-index: 10; width: 100%; max-width: 600px;">
+            <div style="margin-bottom: 50px;">
+                <h2
+                    style="font-size: 28px; font-weight: 800; color: #1a2a3a; margin-bottom: 15px; position: relative; display: inline-block;">
+                    LET'S BUILD YOUR BRAND TOGETHER
+                    <span
+                        style="position: absolute; right: -50px; top: -30px; font-size: 80px; color: #e74c3c; font-family: serif; line-height: 1;">”</span>
+                </h2>
+                <p style="font-size: 15px; color: #3b5266; line-height: 1.6;">
+                    Ready to unlock scalable growth? Let's book a strategy session and tailor the perfect digital plan
+                    for your business.
+                </p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 30px; margin-bottom: 60px; align-items: center;">
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div class="contact-icon" style="width: 40px; height: 40px;"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg></div>
+                    <span style="font-size: 14px; color: #1a2a3a; font-weight: 600;">technifuse2005@gmail.com</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div class="contact-icon" style="width: 40px; height: 40px;"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
+                        </svg></div>
+                    <span style="font-size: 14px; color: #1a2a3a; font-weight: 600;">+92 317 6856432</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div class="contact-icon" style="width: 40px; height: 40px;"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
+                        </svg></div>
+                    <span style="font-size: 14px; color: #1a2a3a; font-weight: 600;">@technifuse</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div class="contact-icon" style="width: 40px; height: 40px;"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                        </svg></div>
+                    <a href="https://technifuse.com"
+                        style="font-size: 14px; color: #3498db; font-weight: 600; text-decoration: underline;">technifuse.com</a>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div class="contact-icon" style="width: 40px; height: 40px;"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg></div>
+                    <span style="font-size: 14px; color: #1a2a3a; font-weight: 600;">Lahore, Pakistan</span>
+                </div>
+            </div>
+
+            <div>
+                <img src="./public/asset/techlogo.png" alt="Technifuse" style="max-width: 220px;">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
